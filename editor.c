@@ -12,11 +12,12 @@
 using namespace std;
 
 struct nodo_editor{
-	/* acá deben figurar los campos/estructuras que usted considere necesarios
-	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
+	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
+	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
+	editor sig, ant;
+	cadena texto;
 };
-
 
 editor CrearEditor(){
 // Crea la estructura editor.
