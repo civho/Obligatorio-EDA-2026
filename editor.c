@@ -16,7 +16,7 @@ struct nodo_editor{
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 	editor sig, ant;
-	cadena texto;
+	Cadena texto;
 };
 
 editor CrearEditor(){
