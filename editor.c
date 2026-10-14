@@ -6,6 +6,7 @@
 
 #include "editor.h"
 #include "linea.h"
+#include "buffer.h"
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
@@ -17,7 +18,8 @@ struct nodo_editor{
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 	editor sig, ant;
-	linea linea;
+	linea linea; 
+	buffer buffer; // las 3 ultimas letras
 };
 
 editor CrearEditor(){
@@ -37,7 +39,6 @@ TipoRetorno InsertarLinea(editor & e){
 		e->ant = e;
 		e->sig = e;
 		
-
 	}else {
 		editor aux = new nodo_editor();
 		aux->sig = e;
@@ -45,13 +46,14 @@ TipoRetorno InsertarLinea(editor & e){
 		aux->ant->sig = aux;
 		e->ant = aux;
 	}
+	conL++;
 	return OK;
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(posicionLinea == 0){
+	if(posicionLinea == 0 || posicionLinea > contL + 1)
 		return ERROR;
 	}else{ 
 		if(e == NULL) {
@@ -66,7 +68,6 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 		} 
 		if (posicionLinea == contL + 1){
 			InsertarLinea(e);
-			contL++;
 			return OK;
 		}else{
 			if (posicionLinea < contL + 1){
@@ -81,13 +82,13 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 				aux->ant = iter->ant;
 				iter->ant = aux;
 				aux->ant->sig = aux;
-			}else 
-				return ERROR;
+				conL++;
+				return OK;
 		}
 	}
 }
 
-TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){
+TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 // Borra la línea en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 	return NO_IMPLEMENTADA;

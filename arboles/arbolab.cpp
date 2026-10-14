@@ -14,25 +14,24 @@ arbolb insertar(int x, arbolb abiz, arbolb abde){
     arbolb aux= new(nodo_arbolb);   
     aux->dato=x;
     aux->izq = abiz;
-    aux->der = abde;
- 
+    aux->der = abde; 
     return aux;
 }
 bool raíz(arbolb ab){
-    return ab->dato;
-}
 // pre: ab no vacio
 // pos: retorna la raiz de un arbol ab
-
+    return ab->dato;
+}
+    
 arbolb abiz(arbolb ab){
+//retorna subarbol iz
     return ab->izq;
 }
-//retorna subarbol iz
 
 arbolb abde(arbolb ab){
+// retorna subarbol der
     return ab->der;
 }
-// retorna subarbol der
 
 bool vacio(arbolb ab){
     return (ab == NULL);
