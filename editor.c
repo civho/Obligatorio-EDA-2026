@@ -34,48 +34,57 @@ TipoRetorno InsertarLinea(editor & e){
 // Ver más detalles en la letra del obligatorio.
 	if(e == NULL){ 
 		editor e = new nodo_editor();
-		e->ant = NULL;
-		e->sig = NULL;
-
+		e->ant = e;
+		e->sig = e;
 		
 
 	}else {
 		editor aux = new nodo_editor();
-		e->sig = aux;
-		aux->ant = e;
-		aux->sig = NULL;
-		e = aux;
+		aux->sig = e;
+		aux->ant = e->ant;
+		aux->ant->sig = aux;
+		e->ant = aux;
 	}
-
-
 	return OK;
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-if(posicionLinea == 0){
-	return ERROR;
-}else { 
-	int contador = 0;
-	
-	if(posicionLinea > 1){ //se fija que la posici[on no sea la primera y de hecho requiera movimiento
-		editor recorre = e;
-		while(recorre->ant != NULL) {
-			recorre = recorre->ant;
+	if(posicionLinea == 0){
+		return ERROR;
+	}else{ 
+		if(e == NULL) {
+			if(posicionLinea > 1){
+				// no hay lineas y quiere insertar una linea posicion mayor a primera
+				return ERROR; 
+			}else {
+				// no hay lineas y quiere insertar la primer linea
+				InsertarLinea(e);
+				return OK;
+			}
+		} 
+		if (posicionLinea == contL + 1){
+			InsertarLinea(e);
+			contL++;
+			return OK;
+		}else{
+			if (posicionLinea < contL + 1){
+				int posaya = 1;
+				editor iter = e; 
+				while(posaya != posicionLinea){
+					posaya++;
+					iter = iter -> sig;
+				}
+				editor aux = new (nodo_editor);
+				aux->sig = iter;
+				aux->ant = iter->ant;
+				iter->ant = aux;
+				aux->ant->sig = aux;
+			}else 
+				return ERROR;
 		}
-		while(recorre != NULL and contador < posicionLinea) {
-
-			recorre = recorre->sig;
-		}
-		
-		}
-
-
-	}else 
-
-
-	return NO_IMPLEMENTADA;
+	}
 }
 
 TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){
