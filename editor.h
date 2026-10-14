@@ -88,4 +88,3 @@ TipoRetorno DestruirEditor(editor & e);
 // Destruye la estructura editor y libera la memoria asociada.
 
 #endif
-

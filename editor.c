@@ -5,6 +5,7 @@
 // Modulo de implementacion de editor.
 
 #include "editor.h"
+#include "linea.h"
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
@@ -16,7 +17,7 @@ struct nodo_editor{
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 	editor sig, ant;
-	Cadena texto;
+	linea linea;
 };
 
 editor CrearEditor(){
@@ -31,12 +32,49 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if(e == NULL){ 
+		editor e = new nodo_editor();
+		e->ant = NULL;
+		e->sig = NULL;
+
+		
+
+	}else {
+		editor aux = new nodo_editor();
+		e->sig = aux;
+		aux->ant = e;
+		aux->sig = NULL;
+		e = aux;
+	}
+
+
+	return OK;
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
+if(posicionLinea == 0){
+	return ERROR;
+}else { 
+	int contador = 0;
+	
+	if(posicionLinea > 1){ //se fija que la posici[on no sea la primera y de hecho requiera movimiento
+		editor recorre = e;
+		while(recorre->ant != NULL) {
+			recorre = recorre->ant;
+		}
+		while(recorre != NULL and contador < posicionLinea) {
+
+			recorre = recorre->sig;
+		}
+		
+		}
+
+
+	}else 
+
+
 	return NO_IMPLEMENTADA;
 }
 
@@ -73,6 +111,8 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
+	if(posicionPalabra > 0 && posicionPalabra < MAX_CANT_PALABRAS_X_LINEA )
+
 	return NO_IMPLEMENTADA;
 }
 
@@ -91,6 +131,9 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
+	
+
+
 	return NO_IMPLEMENTADA;
 }
 
