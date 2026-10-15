@@ -12,7 +12,7 @@
 #include <iostream>
 
 using namespace std;
-
+unsigned int contL = 0;
 struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
@@ -20,6 +20,7 @@ struct nodo_editor{
 	editor sig, ant;
 	linea linea; 
 	buffer buffer; // las 3 ultimas letras
+
 };
 
 editor CrearEditor(){
@@ -35,10 +36,10 @@ TipoRetorno InsertarLinea(editor & e){
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 	if(e == NULL){ 
-		editor e = new nodo_editor();
-		e->ant = e;
-		e->sig = e;
-		
+		editor aux = new nodo_editor();
+		aux->ant = aux;
+		aux->sig = aux;
+		e = aux;
 	}else {
 		editor aux = new nodo_editor();
 		aux->sig = e;
@@ -46,16 +47,16 @@ TipoRetorno InsertarLinea(editor & e){
 		aux->ant->sig = aux;
 		e->ant = aux;
 	}
-	conL++;
+	contL ++;
 	return OK;
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(posicionLinea == 0 || posicionLinea > contL + 1)
+	if(posicionLinea == 0 || posicionLinea > contL + 1){
 		return ERROR;
-	}else{ 
+	} else{ 
 		if(e == NULL) {
 			if(posicionLinea > 1){
 				// no hay lineas y quiere insertar una linea posicion mayor a primera
@@ -71,7 +72,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 			return OK;
 		}else{
 			if (posicionLinea < contL + 1){
-				int posaya = 1;
+				unsigned int posaya = 1;
 				editor iter = e; 
 				while(posaya != posicionLinea){
 					posaya++;
@@ -82,10 +83,12 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 				aux->ant = iter->ant;
 				iter->ant = aux;
 				aux->ant->sig = aux;
-				conL++;
+				contL++;
 				return OK;
 		}
 	}
+ }
+ return ERROR;
 }
 
 TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
@@ -121,7 +124,7 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	if(posicionPalabra > 0 && posicionPalabra < MAX_CANT_PALABRAS_X_LINEA )
+
 
 	return NO_IMPLEMENTADA;
 }
