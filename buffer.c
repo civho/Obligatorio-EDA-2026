@@ -1,5 +1,7 @@
 #include "buffer.h"
 #include "definiciones.h"
+#include <stdio.h>
+#include <string.h> 
 
 struct nodo_buffer{
     buffer sig, ant;
@@ -30,17 +32,17 @@ buffer AgBuffer(buffer b, Cadena pal){
         }
         else{
             if(iter->sig != b && iter->ant == b ){
-            buffer aux = new(nodo_buffer); 
-            strcpy(aux->palabra, pal);
-            aux->sig = b;
-            aux->ant = iter;
-            return b; 
+                buffer aux = new(nodo_buffer); 
+                strcpy(aux -> palabra, pal);
+                aux->sig = b;
+                aux->ant = iter;
+                return b; 
             }
-        }
-        else{
-            strcpy(b->palabra, pal);
-            b = b->sig;
-            return b; 
+            else{
+                strcpy(b -> palabra, pal);
+                b = b->sig;
+                return b; 
+            }
         }
     }
 }
