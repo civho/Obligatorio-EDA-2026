@@ -46,6 +46,8 @@ TipoRetorno InsertarLinea(editor & e){
 		aux->ant = e->ant;
 		aux->ant->sig = aux;
 		e->ant = aux;
+
+		
 	}
 	contL ++;
 	return OK;

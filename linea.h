@@ -14,3 +14,5 @@ linea borrarLinea(linea l, int pos);
 linea sigLinea(linea l);
 // devuelve la siguiete linea
 
+void imprimirLinea(linea l);
+// imprime todas las linas 
