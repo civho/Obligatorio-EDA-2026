@@ -1,14 +1,9 @@
 #include "linea.h"
 #include "definiciones.h"
-
-struct linea {
+#include "palabra.h"
+struct nodo_linea {
     linea ant, sig;
-    Cadena palabra;
-    
+    pal palabra;   
 };
 
-bool CheckPosLinea(editor & e, Posicion linea, Posicion palabra) { 
-    if(e == NULL){
-        
-    }
-}
+
