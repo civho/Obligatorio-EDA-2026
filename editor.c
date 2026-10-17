@@ -12,20 +12,19 @@
 #include <iostream>
 
 using namespace std;
-unsigned int contL = 0;
+
 struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	editor sig, ant;
 	linea linea; 
 	buffer buffer; // las 3 ultimas letras
-
+	unsigned int contL = 0;
 };
 
 editor CrearEditor(){
 // Crea la estructura editor.
-	editor e = new(nodo_editor);
+	editor e = NULL;
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
 	return e;
