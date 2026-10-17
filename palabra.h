@@ -7,8 +7,7 @@ bool IsEmptyPal(pal p);
 //Checkea si p es vacio.
 
 pal PalSig(pal p);
-//Devuelve el nodo pal siguiente, si hay. De lo contrario devuelve NULL
-
+//Devuelve el nodo pal siguiente, si hay. De lo contrario devuelve NULL hasta si p es vacio.
 pal AddPalPos(pal p,int x);
 //Agrega una palabra en un nodo pal en x posicion, devuelve error si la posicion no es valida
 

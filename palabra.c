@@ -33,10 +33,14 @@ pal AddPalPos(pal p,int x,Cadena palabra){
 		return ERROR;
 	}else 
 		PalSig(p)=AddPalPos(PalSig(p),x-1,palabra);
-		return p
+		return p;
+}
 //Falta agregar la palabra propiamente dicha, y si esta bien implementear el "ERROR" aca.Tambien chequear que x es menor que MAX PALABRA.
 
 pal BorrarPalPos(pal p,int x){
+	if (IsEmptyPal(p)){
+		return ERROR;
+	}else{
 	if (x==0){
 		pal aux=PalSig(p);
 		delete p;
@@ -44,8 +48,9 @@ pal BorrarPalPos(pal p,int x){
 	}else {
 		PalSig(p)=BorrarPalPos(PalSig(p),x-1);
 	}
+	}
 		return p;
-	
+}	
 //Falta chequear que el X es valido
 
 pal BorrarPalPalabra(pal p,Cadena palabra);
