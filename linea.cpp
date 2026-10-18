@@ -20,44 +20,41 @@ linea consLinea(linea l, unsigned int *contl){
         aux->ant = aux;
         l = aux;
 
-    }else if(l->sig != l){
-        linea recorre = l;
-        while(recorre->sig != l){
-            recorre = recorre->sig;
-        }
-        l->ant->sig = aux; 
-        aux->ant = l->ant;
-        aux->sig = l;
-        l->ant = aux;
-
-       
-    }else {
-        aux->sig = l;
-        aux->ant = l; 
+    }else if(l->sig == l){
         l->sig = aux;
         l->ant = aux;
-        
-        
+        aux->sig = l;
+        aux->ant = l;
+       
+    }else {
+            aux->sig = l;
+            aux->ant = l->ant->ant;
+            l->ant->ant->sig = aux;
+            l->ant = aux;        
     }
     //sumar contador
     return l;
 }
 
-linea borrarLinea(linea l, int pos) {
-    int contador = 3;
-    if(l == NULL){
-        return NULL; 
-    }else if(l->sig != l){
-        while(l->sig != l){ 
-            if(contador >= pos) { 
-
-            }
-        }
-    }
+linea borrarLinea(linea l, int x) {
+    linea aux = l;
     
+    if(l->palabra != NULL){
+        DeleteAllPall(l->palabra);
+    }else {
+        if(l->ant != l){ 
+            linea aux = l;
+            aux->ant->sig = aux->sig;
+            l->ant = aux->ant;
+
+        }
+        
+    }
 }
 
-linea sigLinea(linea l);
+linea sigLinea(linea l){
+    return l->sig;
+}
 // devuelve la siguiete linea
 
 
