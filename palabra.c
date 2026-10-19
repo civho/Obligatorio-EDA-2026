@@ -1,5 +1,8 @@
 #include "palabra.h"
 #include "definiciones.h"
+#include <string.h>
+
+
 struct nodo_pal {
     pal sig;
     Cadena palabra;
@@ -26,16 +29,15 @@ pal PalSig(pal p){
 	
 pal AddPalPos(pal p,int x,Cadena palabra){
 	if (x==0){
-		pal aux = new(nodo_pal);
-		PalSig(aux)=PalSig(p);
-		return aux;
+		p=consPal(p,palabra);
+		return p;
 	}else if (IsEmptyPal(p)){
 		return ERROR;
 	}else 
 		PalSig(p)=AddPalPos(PalSig(p),x-1,palabra);
 		return p;
 }
-//Falta agregar la palabra propiamente dicha, y si esta bien implementear el "ERROR" aca.Tambien chequear que x es menor que MAX PALABRA.
+//Falta chequear que el X es valido,y como manejar el error
 
 pal BorrarPalPos(pal p,int x){
 	if (IsEmptyPal(p)){
@@ -51,7 +53,29 @@ pal BorrarPalPos(pal p,int x){
 	}
 		return p;
 }	
-//Falta chequear que el X es valido
+//Falta chequear que el X es valido, y como manejar el error
 
 pal BorrarPalPalabra(pal p,Cadena palabra);
 //Borra el nodo pal si es igual a la palabra ingresada
+
+pal DeleteAllPal(pal p){
+	if (p==NULL)
+		return NULL;
+}else {
+	PalSig(p)=DeleteAllPal(PalSig(p));
+	delete p->palabra;
+	delete p;
+	p=NULL;
+	return p;
+}
+
+pal consPal(pal p, Cadena palabra){
+	Cadena auxpal = new(char[MAX_PAL]);
+	pal aux = new(nodo_pal);
+	PalSig(aux)=PalSig(p);
+	aux->palabra=auxpal;
+	strcpy(aux->palabra,palabra);
+}
+//Falta ver si esta bien implementear el "ERROR" aca.Tambien chequear que x es menor que MAX PALABRA(por lineas). 
+//MAX PAL habria que declararla? Maximo de letras que entrarian por palabra.
+//No se si el strcpy funciona...
