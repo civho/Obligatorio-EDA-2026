@@ -18,14 +18,14 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	linea linea; 
-	buffer buffer; // las 3 ultimas letras
+	linea linea = NULL; 
+	buffer buffer = NULL; // las 3 ultimas letras
 	unsigned int contL = 0;
 };
 
 editor CrearEditor(){
 // Crea la estructura editor.
-	editor e = NULL;
+	editor e = new(nodo_editor);
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
 	return e;
@@ -35,61 +35,29 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	if(e->linea == NULL){ 
-		e->linea = 
-		e->liean->ant = aux;
-		aux->sig = aux;
-		e->linea = aux;
-	}else {
-		editor aux = new nodo_linea();
-		aux->sig = e;
-		aux->ant = e->ant;
-		aux->ant->sig = aux;
-		e->ant = aux;
-
-		
-	}
-	contL ++;
+	e->linea = consLinea(e->linea);
+	e->contL ++;
 	return OK;
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(posicionLinea == 0 || posicionLinea > contL + 1){
-		return ERROR;
-	} else{ 
-		if(e == NULL) {
-			if(posicionLinea > 1){
-				// no hay lineas y quiere insertar una linea posicion mayor a primera
-				return ERROR; 
-			}else {
-				// no hay lineas y quiere insertar la primer linea
-				InsertarLinea(e);
-				return OK;
-			}
-		} 
-		if (posicionLinea == contL + 1){
-			InsertarLinea(e);
-			return OK;
-		}else{
-			if (posicionLinea < contL + 1){
-				unsigned int posaya = 1;
-				editor iter = e; 
-				while(posaya != posicionLinea){
-					posaya++;
-					iter = iter -> sig;
-				}
-				editor aux = new (nodo_editor);
-				aux->sig = iter;
-				aux->ant = iter->ant;
-				iter->ant = aux;
-				aux->ant->sig = aux;
-				contL++;
-				return OK;
+	if(e->contL + 1 >= posicionLinea) {
+		linea aux = e->linea;
+
+		for(unsigned int i = 1; i < posicionLinea; i++){
+			aux = sigLinea(aux); // lleva  aux a la linea deseada 	
 		}
+		if(posicionLinea == e->contL + 1) { //verifica que la linea deseada sea la primera o la ultima
+			aux = snocLinea(aux);
+		}else {
+			aux = consLinea(aux);
+
+		}
+			return OK;
+
 	}
- }
  return ERROR;
 }
 
@@ -188,5 +156,4 @@ TipoRetorno DestruirEditor(editor & e){
 // Destruye la estructura editor y libera la memoria asociada.
 	return NO_IMPLEMENTADA;
 }
-
 

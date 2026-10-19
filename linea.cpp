@@ -12,27 +12,35 @@ linea crearLinea(){
     return NULL;
 }
 
-linea consLinea(linea l, unsigned int *contl){
+linea snocLinea(linea l){
     linea aux = new nodo_linea;
-    aux->palabra = crearPalabra();
+    aux->palabra = NULL;
     if(l == NULL){ 
         aux->sig = aux;
         aux->ant = aux;
         l = aux;
-
-    }else if(l->sig == l){
-        l->sig = aux;
-        l->ant = aux;
-        aux->sig = l;
-        aux->ant = l;
-       
     }else {
-            aux->sig = l;
-            aux->ant = l->ant->ant;
-            l->ant->ant->sig = aux;
-            l->ant = aux;        
+        aux->sig = l;
+        aux->ant = l->ant;
+        l->ant->sig = aux;
+        l->ant = aux;        
     }
-    //sumar contador
+    return l;
+}
+linea consLinea(linea l) {
+     linea aux = new nodo_linea;
+    aux->palabra = NULL;
+    if(l == NULL){ 
+        aux->sig = aux;
+        aux->ant = aux;
+        l = aux;
+    }else {
+        aux->sig = l;
+        aux->ant = l->ant;
+        l->ant->sig = aux;
+        l->ant = aux;      
+        l=aux;  
+    }
     return l;
 }
 
@@ -40,7 +48,7 @@ linea borrarLinea(linea l, int x) {
     linea aux = l;
     
     if(l->palabra != NULL){
-        DeleteAllPall(l->palabra);
+       l->palabra = NULL;
     }else {
         if(l->ant != l){ 
             linea aux = l;
@@ -55,6 +63,10 @@ linea borrarLinea(linea l, int x) {
 linea sigLinea(linea l){
     return l->sig;
 }
-// devuelve la siguiete linea
 
+linea antLinea(linea l){
+    return l->ant;
+}
+
+// devuelve la siguiete linea
 
