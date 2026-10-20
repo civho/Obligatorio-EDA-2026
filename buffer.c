@@ -16,39 +16,38 @@ buffer crearBuffer(){
 
 buffer AgBuffer(buffer b, Cadena pal){
 // Agrega la ultima plabara al buffer y si el esta lleno remplaza la palabra por una del buffer 
-    if (b == NULL){    
-        b = new(nodo_buffer);
-        b->sig = b;
-        b->ant = b;
-        strcpy(b->palabra, pal);
-        return b;
+       if (b == NULL){    
+        buffer aux = new(nodo_buffer);
+        strcpy(aux->palabra, pal);
+        aux->sig = NULL;
+        aux->ant = NULL;
+        return aux;
     }
     else{
         buffer iter = b;
-        if (iter->sig == b && iter->ant == b ){
+        int cantT = 1;
+        while(iter->sig != NULL){
+            iter = iter->sig;
+            cantT++;
+        }
+        if (iter->sig == NULL && cantT < MAX_CANT_ULTIMAS_PALABRAS){
             buffer aux = new(nodo_buffer); 
-            strcpy(aux->palabra, pal);
-            aux->sig = b;
-            aux->ant = b;
-            b->sig = aux;
-            b -> ant = aux;
-            return b;
+            strcpy(aux -> palabra, pal);
+            aux -> sig = b;
+            aux -> ant = NULL;
+            b -> ant = aux;    
+            return aux;
         }
         else{
-            iter = iter -> sig;
-            if(iter->sig != b && iter->ant == b ){
+            if(cantT == MAX_CANT_ULTIMAS_PALABRAS){
                 buffer aux = new(nodo_buffer); 
                 strcpy(aux -> palabra, pal);
-                aux->sig = b;
-                aux->ant = iter;
-                iter->sig = aux;
+                aux -> sig = b;
+                aux -> ant = NULL;
                 b -> ant = aux;
-                return b; 
-            }
-            else{
-                strcpy(b -> palabra, pal);
-                b = b->sig;
-                return b; 
+                iter -> ant -> sig = NULL;
+                delete(iter);    
+                return aux; 
             }
         }
     }
