@@ -22,33 +22,35 @@ buffer AgBuffer(buffer b, Cadena pal){
         aux->sig = NULL;
         aux->ant = NULL;
         return aux;
-    }
-    else{
+    }else{
         buffer iter = b;
         int cantT = 1;
         while(iter->sig != NULL){
             iter = iter->sig;
             cantT++;
         }
-        if (iter->sig == NULL && cantT < MAX_CANT_ULTIMAS_PALABRAS){
+        if (cantT < MAX_CANT_ULTIMAS_PALABRAS){
             buffer aux = new(nodo_buffer); 
             strcpy(aux -> palabra, pal);
             aux -> sig = b;
             aux -> ant = NULL;
             b -> ant = aux;    
             return aux;
-        }
-        else{
-            if(cantT == MAX_CANT_ULTIMAS_PALABRAS){
-                buffer aux = new(nodo_buffer); 
-                strcpy(aux -> palabra, pal);
-                aux -> sig = b;
-                aux -> ant = NULL;
-                b -> ant = aux;
-                iter -> ant -> sig = NULL;
-                delete(iter);    
-                return aux; 
-            }
+        }else{
+            buffer aux = new(nodo_buffer); 
+            strcpy(aux -> palabra, pal);
+            aux -> sig = b;
+            aux -> ant = NULL;
+            b -> ant = aux;
+            if (iter->ant != NULL) {
+                iter->ant->sig = NULL;
+                delete(iter);
+            }else{
+                aux->sig = NULL; 
+                delete(iter);
+            }    
+            return aux; 
         }
     }
+}
 }
