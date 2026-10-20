@@ -15,7 +15,7 @@ buffer crearBuffer(){
 }
 
 buffer AgBuffer(buffer b, Cadena pal){
-// Agrega la ultima plabara al buffer y si el esta lleno remplaza la palabra por una del buffer 
+// Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
        if (b == NULL){    
         buffer aux = new(nodo_buffer);
         strcpy(aux->palabra, pal);
