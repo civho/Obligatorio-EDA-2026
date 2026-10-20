@@ -1,7 +1,7 @@
 #include "palabra.h"
 #include "definiciones.h"
 #include <string.h>
-
+int MAX_PAL=20;
 
 struct nodo_pal {
     pal sig;
@@ -18,6 +18,7 @@ bool IsEmptyPal(pal p){
 	}else {
 		return false;
 	}
+}
 	
 
 pal PalSig(pal p){
@@ -26,6 +27,7 @@ pal PalSig(pal p){
 	}else{
 		return p->sig;
 	}
+}
 	
 pal AddPalPos(pal p,int x,Cadena palabra){
 	if (x==0){
@@ -33,9 +35,10 @@ pal AddPalPos(pal p,int x,Cadena palabra){
 		return p;
 	}else if (IsEmptyPal(p)){
 		return ERROR;
-	}else 
+	}else {
 		PalSig(p)=AddPalPos(PalSig(p),x-1,palabra);
 		return p;
+	}
 }
 //Falta chequear que el X es valido,y como manejar el error
 
@@ -59,7 +62,7 @@ pal BorrarPalPalabra(pal p,Cadena palabra);
 //Borra el nodo pal si es igual a la palabra ingresada
 
 pal DeleteAllPal(pal p){
-	if (p==NULL)
+	if (p==NULL){
 		return NULL;
 }else {
 	PalSig(p)=DeleteAllPal(PalSig(p));
@@ -67,6 +70,7 @@ pal DeleteAllPal(pal p){
 	delete p;
 	p=NULL;
 	return p;
+}
 }
 
 pal consPal(pal p, Cadena palabra){
@@ -79,3 +83,9 @@ pal consPal(pal p, Cadena palabra){
 //Falta ver si esta bien implementear el "ERROR" aca.Tambien chequear que x es menor que MAX PALABRA(por lineas). 
 //MAX PAL habria que declararla? Maximo de letras que entrarian por palabra.
 //No se si el strcpy funciona...
+
+void ImprimirPal(pal p){
+	if (p!=NULL){
+		while (
+		printf(
+	
