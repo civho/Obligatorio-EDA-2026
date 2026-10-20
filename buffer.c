@@ -53,4 +53,3 @@ buffer AgBuffer(buffer b, Cadena pal){
         }
     }
 }
-}
