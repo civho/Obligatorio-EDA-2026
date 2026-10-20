@@ -86,6 +86,12 @@ pal consPal(pal p, Cadena palabra){
 
 void ImprimirPal(pal p){
 	if (p!=NULL){
-		while (
-		printf(
+		i=0;
+		while (p->palabra[i]!='\0'){
+			printf(p->palabra[i];
+		}
+		printf(" ");
+	}
+	ImprimirPal(PalSig(p);
+}
 	
