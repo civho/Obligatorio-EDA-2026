@@ -20,7 +20,7 @@ struct nodo_editor{
 	debe implementarse independientemente e incluirse */
 	linea linea = NULL; 
 	buffer buffer = NULL; // las 3 ultimas letras
-	unsigned int contL = 0;
+	Posicion contL = 0;
 };
 
 editor CrearEditor(){
@@ -45,14 +45,20 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Ver más detalles en la letra del obligatorio.
 	if(e->contL + 1 >= posicionLinea) {
 		linea aux = e->linea;
-
-		for(unsigned int i = 1; i < posicionLinea; i++){
-			aux = sigLinea(aux); // lleva  aux a la linea deseada 	
-		}
+		
+		aux = buscarLinea(aux, posicionLinea); // se mueve a la linea especificada, si no hay linea
+		
 		if(posicionLinea == e->contL + 1) { //verifica que la linea deseada sea la primera o la ultima
 			aux = snocLinea(aux);
+			e->linea = sigLinea(aux); 
+
 		}else {
-			aux = consLinea(aux);
+			if(e->linea == aux) { // se fija si es la primera linea para así cambiar el puntero del editor a la nueva primera linea
+				aux = consLinea(aux);
+				e->linea = aux;
+			}else {
+				aux = consLinea(aux);
+			}
 
 		}
 			return OK;

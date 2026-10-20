@@ -68,5 +68,17 @@ linea antLinea(linea l){
     return l->ant;
 }
 
+bool existeLinea(Posicion contL,Posicion posicionLinea) {
+   return contL + 1 >= posicionLinea;
+    
+}
+
+linea buscarLinea(linea l, Posicion x){ 
+    for(unsigned int i = 1; i < x; i++){
+			l = sigLinea(l); // lleva  aux a la linea deseada 	
+		}
+        return l;
+}
+
 // devuelve la siguiete linea
 
