@@ -29,20 +29,18 @@ pal PalSig(pal p){
 	}
 }
 	
-pal AddPalPos(pal p,int x,Cadena palabra){
+pal AddPalPos(pal p,Posicion x,Cadena palabra){
 	if (x==0){
 		p=consPal(p,palabra);
 		return p;
-	}else if (IsEmptyPal(p)){
-		return ERROR;
 	}else {
-		PalSig(p)=AddPalPos(PalSig(p),x-1,palabra);
+		p->sig=AddPalPos(PalSig(p),x-1,palabra);
 		return p;
 	}
 }
 //Falta chequear que el X es valido,y como manejar el error
 
-pal BorrarPalPos(pal p,int x){
+pal BorrarPalPos(pal p,Posicion x){
 	if (IsEmptyPal(p)){
 		return ERROR;
 	}else{
@@ -94,4 +92,11 @@ void ImprimirPal(pal p){
 	}
 	ImprimirPal(PalSig(p);
 }
-	
+
+Posicion cantPal(pal p){
+	Posicion cont=0;
+	while (p!=NULL){
+		cant++;
+	}
+return cant;
+}
