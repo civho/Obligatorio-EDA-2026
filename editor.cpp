@@ -43,17 +43,17 @@ TipoRetorno InsertarLinea(editor & e){
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(e->contL + 1 >= posicionLinea) {
+	if(existeLinea(e->contL, posicionLinea)) {
 		linea aux = e->lin;
 		
-		aux = buscarLinea(aux, posicionLinea); // se mueve a la lin especificada, si no hay lin
+		aux = buscarLinea(aux, posicionLinea); // se mueve a la linea especificada, si no hay linea se queda donde esta
 		
-		if(posicionLinea == e->contL + 1) { //verifica que la lin deseada sea la primera o la ultima
+		if(posicionLinea == e->contL + 1) { //verifica que la linea deseada sea la primera o la ultima
 			aux = snocLinea(aux);
 			e->lin = sigLinea(aux); 
 
 		}else {
-			if(e->lin == aux) { // se fija si es la primera lin para así cambiar el puntero del editor a la nueva primera lin
+			if(e->lin == aux) { // se fija si es la primera linea para así cambiar el puntero del editor a la nueva primera linea
 				aux = consLinea(aux);
 				e->lin = aux;
 			}else {
@@ -70,19 +70,29 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 // Borra la línea en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	
-	return NO_IMPLEMENTADA;
+	linea aux=e->lin;
+	if(existeLinea(e->contL ,posicionLinea)) {
+		aux = buscarLinea(aux, posicionLinea);
+		aux =	borrarLinea(aux);
+		e->contL = e->contL-1;
+		return OK;
+	}else {
+		return ERROR;
+	}
+	return ERROR;
 }
 
 TipoRetorno BorrarTodo(editor & e){
 // Borra todas las líneas del texto.
 // Ver más detalles en la letra del obligatorio.
+
 	return NO_IMPLEMENTADA;
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en el texto.
 // Ver más detalles en la letra del obligatorio.
+	
 	return NO_IMPLEMENTADA;
 }
 

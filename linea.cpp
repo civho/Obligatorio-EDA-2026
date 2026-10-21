@@ -44,7 +44,7 @@ linea consLinea(linea l) {
     return l;
 }
 
-linea borrarLinea(linea l, int x) {
+linea borrarLinea(linea l) {
     
     if(l->palabra != NULL){
        l->palabra = NULL; //Borrar palabra
@@ -77,7 +77,7 @@ bool existeLinea(Posicion contL,Posicion posicionLinea) {
 }
 
 linea buscarLinea(linea l, Posicion x){ 
-    for(unsigned int i = 1; i < x; i++){
+    for(Posicion i = 1; i < x; i++){
 			l = sigLinea(l);
 		}
         return l;

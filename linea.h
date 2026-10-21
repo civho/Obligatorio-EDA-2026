@@ -11,7 +11,7 @@ linea consLinea(linea l);
 linea snocLinea(linea l);
 // agrega linea al final
 
-linea borrarLinea(linea l, int pos);
+linea borrarLinea(linea l);
 // elimina la linea especificada y liberar memoria
 
 linea sigLinea(linea l), lienaAnt(linea l);
