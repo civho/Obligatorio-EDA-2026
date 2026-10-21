@@ -22,3 +22,6 @@ pal DeleteAllPal(pal p);
 
 pal consPal(pal p, Cadena palabra);
 //POS:Añade una palabra en el nodo pal dado.
+
+Posicion cantPal(pal p);
+//POS:Retorna la cantidad de palabras en un nodo pal.
