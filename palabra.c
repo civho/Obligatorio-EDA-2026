@@ -41,20 +41,16 @@ pal AddPalPos(pal p,Posicion x,Cadena palabra){
 //Falta chequear que el X es valido,y como manejar el error
 
 pal BorrarPalPos(pal p,Posicion x){
-	if (IsEmptyPal(p)){
-		return ERROR;
-	}else{
 	if (x==0){
 		pal aux=PalSig(p);
 		delete p;
 		return aux;
 	}else {
-		PalSig(p)=BorrarPalPos(PalSig(p),x-1);
+		p->sig=BorrarPalPos(PalSig(p),x-1);
 	}
-	}
+	
 		return p;
 }	
-//Falta chequear que el X es valido, y como manejar el error
 
 pal BorrarPalPalabra(pal p,Cadena palabra);
 //Borra el nodo pal si es igual a la palabra ingresada
@@ -63,7 +59,7 @@ pal DeleteAllPal(pal p){
 	if (p==NULL){
 		return NULL;
 }else {
-	PalSig(p)=DeleteAllPal(PalSig(p));
+	p->sig=DeleteAllPal(PalSig(p));
 	delete p->palabra;
 	delete p;
 	p=NULL;
