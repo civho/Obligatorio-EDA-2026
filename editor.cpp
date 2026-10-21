@@ -18,8 +18,8 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	linea linea = NULL; 
-	buffer buffer = NULL; // las 3 ultimas letras
+	linea lin = NULL; 
+	buffer buf = NULL; // las 3 ultimas letras
 	Posicion contL = 0;
 };
 
@@ -35,7 +35,7 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	e->linea = consLinea(e->linea);
+	e->lin = consLinea(e->lin);
 	e->contL ++;
 	return OK;
 }
@@ -44,18 +44,18 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 	if(e->contL + 1 >= posicionLinea) {
-		linea aux = e->linea;
+		linea aux = e->lin;
 		
-		aux = buscarLinea(aux, posicionLinea); // se mueve a la linea especificada, si no hay linea
+		aux = buscarLinea(aux, posicionLinea); // se mueve a la lin especificada, si no hay lin
 		
-		if(posicionLinea == e->contL + 1) { //verifica que la linea deseada sea la primera o la ultima
+		if(posicionLinea == e->contL + 1) { //verifica que la lin deseada sea la primera o la ultima
 			aux = snocLinea(aux);
-			e->linea = sigLinea(aux); 
+			e->lin = sigLinea(aux); 
 
 		}else {
-			if(e->linea == aux) { // se fija si es la primera linea para así cambiar el puntero del editor a la nueva primera linea
+			if(e->lin == aux) { // se fija si es la primera lin para así cambiar el puntero del editor a la nueva primera lin
 				aux = consLinea(aux);
-				e->linea = aux;
+				e->lin = aux;
 			}else {
 				aux = consLinea(aux);
 			}
@@ -101,7 +101,6 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-
 
 	return NO_IMPLEMENTADA;
 }

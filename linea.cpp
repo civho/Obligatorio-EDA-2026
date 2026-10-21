@@ -45,7 +45,6 @@ linea consLinea(linea l) {
 }
 
 linea borrarLinea(linea l, int x) {
-    linea aux = l;
     
     if(l->palabra != NULL){
        l->palabra = NULL; //Borrar palabra

@@ -9,7 +9,7 @@ bool IsEmptyPal(pal p);
 pal PalSig(pal p);
 //POS:Devuelve el nodo pal siguiente, si hay. De lo contrario devuelve NULL hasta si p es vacio.
 
-pal AddPalPos(pal p,Posicion x);
+pal AddPalPos(pal p,Posicion x, Cadena palabra);
 //PRE:Posicion valida.
 //POS:Agrega una palabra en un nodo pal en x posicion.
 
@@ -28,3 +28,6 @@ pal consPal(pal p, Cadena palabra);
 
 Posicion cantPal(pal p);
 //POS:Retorna la cantidad de palabras en un nodo pal.
+
+void ImprimirPal(pal p);
+// imprime la palabra 
