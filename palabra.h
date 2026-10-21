@@ -1,3 +1,6 @@
+#include "definiciones.h"
+#include "editor.h"
+
 typedef struct nodo_pal * pal;
 
 pal CrearPalabra();

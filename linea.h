@@ -1,5 +1,6 @@
 #include "definiciones.h"
 #include "editor.h"
+#include "palabra.h"
 typedef struct nodo_linea * linea;
 
 linea crearLinea();
@@ -26,3 +27,9 @@ bool existeLinea(Posicion contL,Posicion posicionLinea);
 linea buscarLinea(linea l, Posicion x);
 // pre: linea no vacia
 // se mueve a una linea existente
+
+linea insertarPalenLinea(linea l, pal p);
+// inserta una cadena de palabras a una linea
+pal obtenerPal(linea l);
+//Retorna la primera palabra de la linea
+

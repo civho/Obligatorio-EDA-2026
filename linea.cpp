@@ -1,6 +1,6 @@
+#include "palabra.h"
 #include "linea.h"
 #include "definiciones.h"
-#include "palabra.h"
 #include <stdio.h>
 
 struct nodo_linea {
@@ -83,5 +83,11 @@ linea buscarLinea(linea l, Posicion x){
         return l;
 }
 
-// devuelve la siguiete linea
+pal obtenerPal(linea l){
+    return l->palabra;
+}
+linea insertarPalenLinea(linea l, pal p) { 
+    l->palabra = p;
+    return l;
+}
 

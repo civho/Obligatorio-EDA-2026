@@ -22,4 +22,3 @@ typedef unsigned int Posicion;
 #define MAX_CANT_PALABRAS_X_LINEA 3
 #define MAX_CANT_ULTIMAS_PALABRAS 3
 #endif
-

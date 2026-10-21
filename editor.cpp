@@ -92,7 +92,7 @@ TipoRetorno BorrarTodo(editor & e){
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en el texto.
 // Ver más detalles en la letra del obligatorio.
-	
+
 	return NO_IMPLEMENTADA;
 }
 
@@ -111,8 +111,17 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-
-	return NO_IMPLEMENTADA;
+	if(existeLinea(e->contL, posicionLinea)){
+		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
+		pal auxPal = AddPalPos(obtenerPal(auxLin), posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
+		if(auxPal != NULL){
+			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
+		}
+		return OK;
+	}else {
+		return ERROR;
+	}
+	return ERROR;
 }
 
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){

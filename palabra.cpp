@@ -100,3 +100,5 @@ Posicion cantPal(pal p){
 	}
 return cont;
 }
+
+
