@@ -1,6 +1,8 @@
 #include "palabra.h"
 #include "definiciones.h"
 #include <string.h>
+#include <stdio.h>
+
 int MAX_PAL=20;
 
 struct nodo_pal {
