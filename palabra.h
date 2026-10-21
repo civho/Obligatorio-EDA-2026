@@ -8,10 +8,13 @@ bool IsEmptyPal(pal p);
 
 pal PalSig(pal p);
 //POS:Devuelve el nodo pal siguiente, si hay. De lo contrario devuelve NULL hasta si p es vacio.
-pal AddPalPos(pal p,int x);
-//POS:Agrega una palabra en un nodo pal en x posicion, devuelve error si la posicion no es valida
 
-pal BorrarPalPos(pal p,int x);
+pal AddPalPos(pal p,Posicion x);
+//PRE:Posicion valida.
+//POS:Agrega una palabra en un nodo pal en x posicion.
+
+pal BorrarPalPos(pal p,Posicion x);
+//PRE:Posicion valida.
 //POS:Borra el nodo pal en la posicion x.
 
 pal BorrarPalPalabra(pal p,Cadena palabra);
