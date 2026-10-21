@@ -70,6 +70,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 // Borra la línea en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
+	
 	return NO_IMPLEMENTADA;
 }
 

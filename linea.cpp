@@ -48,16 +48,21 @@ linea borrarLinea(linea l, int x) {
     linea aux = l;
     
     if(l->palabra != NULL){
-       l->palabra = NULL;
-    }else {
-        if(l->ant != l){ 
-            linea aux = l;
-            aux->ant->sig = aux->sig;
-            l->ant = aux->ant;
-
-        }
-        
+       l->palabra = NULL; //Borrar palabra
     }
+    if(l->ant != l){ 
+        linea aux = l;
+        l = aux->sig;
+        aux->sig->ant = aux->ant;
+        aux->ant->sig = aux->sig;
+        delete aux;
+    }else {
+        delete l;
+        return NULL;
+    }
+
+    return l;
+        
 }
 
 linea sigLinea(linea l){
@@ -70,12 +75,11 @@ linea antLinea(linea l){
 
 bool existeLinea(Posicion contL,Posicion posicionLinea) {
    return contL + 1 >= posicionLinea;
-    
 }
 
 linea buscarLinea(linea l, Posicion x){ 
     for(unsigned int i = 1; i < x; i++){
-			l = sigLinea(l); // lleva  aux a la linea deseada 	
+			l = sigLinea(l);
 		}
         return l;
 }
