@@ -94,11 +94,14 @@ linea insertarPalenLinea(linea l, pal p) {
 void imprimirLinea(linea l){ 
     linea aux = l;
     Posicion i = 0;
-    while(aux != NULL){
-        i++;
-        printf("%d) ", i);
-        ImprimirPal(aux->palabra);
-        printf("\n");
-        aux = aux->sig;
-    }
+
+        do {
+            i++;
+            printf("%d: ", i);
+            ImprimirPal(aux->palabra);
+            printf("\n");
+            aux = aux->sig;
+    
+        }while(aux != l);
+    
 }

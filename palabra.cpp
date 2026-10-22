@@ -21,7 +21,7 @@ bool IsEmptyPal(pal p){
 		return false;
 	}
 }
-	
+		
 
 pal PalSig(pal p){
 	if (p==NULL){

@@ -99,6 +99,9 @@ TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 TipoRetorno ImprimirTexto(editor & e){
 // Imprime el texto por pantalla.
 // Ver más detalles en la letra del obligatorio.
+	
+
+
 	return NO_IMPLEMENTADA;
 }
 
@@ -151,10 +154,15 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
-	imprimirLinea(e->lin);
+
+	if(existeLinea(e->contL, posicionLinea - 1)) {
+		linea aux = buscarLinea(e->lin, posicionLinea);
+		imprimirLinea(aux);
+		return OK;
+	}
 
 
-	return NO_IMPLEMENTADA;
+	return ERROR;
 }
 
 TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
