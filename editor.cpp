@@ -111,25 +111,29 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	if (e == NULL || palabraAIngresar == NULL ||
-		!existeLinea(e->contL, posicionLinea)) {
-		return ERROR;
-	}
+	if(existeLinea(e->contL, posicionLinea)){
+		
+		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
+		if(posicionPalabra == cantPal(obtenerPal(auxLin)) + 1 && MAX_CANT_PALABRAS_X_LINEA >= posicionPalabra){
+				printf("aaa");
+				 //se asegura que la posicion de insersion de palabra sea correcta
 
-	linea auxLin = buscarLinea(e->lin, posicionLinea);
-	pal palabras = obtenerPal(auxLin);
-	Posicion cantidad = cantPal(palabras);
+				pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
 
-	if (posicionPalabra == 0 ||
-		posicionPalabra > cantidad + 1 ||
-		posicionPalabra > MAX_CANT_PALABRAS_X_LINEA) {
-		return ERROR;
-	}
+					if(auxPal != NULL){
+						auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
+					}else {
+						return ERROR; //devuelve un error si la palabra no se ingreso
+					}
+			}else {
 
-	pal palabrasActualizadas =
-		AddPalPos(palabras, posicionPalabra - 1, palabraAIngresar);
-	insertarPalenLinea(auxLin, palabrasActualizadas);
-	return OK;
+			return ERROR; //devuelve un error si la posicion ingresada es erronea
+			}
+			return OK;
+		}else {
+			return ERROR;
+		}
+		return NO_IMPLEMENTADA;
 }
 
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
