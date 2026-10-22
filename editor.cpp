@@ -43,7 +43,7 @@ TipoRetorno InsertarLinea(editor & e){
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(existeLinea(e->contL, posicionLinea)) {
+	if(existeLinea(e->contL, posicionLinea - 1)) {
 		linea aux = e->lin;
 		
 		aux = buscarLinea(aux, posicionLinea); // se mueve a la linea especificada, si no hay linea se queda donde esta
@@ -111,29 +111,25 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	if(existeLinea(e->contL, posicionLinea)){
-
-		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
-
-		if(posicionPalabra == cantPal(obtenerPal(auxLin)) + 1 && MAX_CANT_PALABRAS_X_LINEA >= posicionPalabra){
-			 //se asegura que la posicion de insersion de palabra sea correcta
-			 
-			pal auxPal = AddPalPos(obtenerPal(auxLin), posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
-
-				if(auxPal != NULL){
-					auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
-				}else {
-					return ERROR; //devuelve un error si la palabra no se ingreso
-				}
-		}else {
-
-		return ERROR; //devuelve un error si la posicion ingresada es erronea
-		}
-		return OK;
-	}else {
+	if (e == NULL || palabraAIngresar == NULL ||
+		!existeLinea(e->contL, posicionLinea)) {
 		return ERROR;
 	}
-	return ERROR;
+
+	linea auxLin = buscarLinea(e->lin, posicionLinea);
+	pal palabras = obtenerPal(auxLin);
+	Posicion cantidad = cantPal(palabras);
+
+	if (posicionPalabra == 0 ||
+		posicionPalabra > cantidad + 1 ||
+		posicionPalabra > MAX_CANT_PALABRAS_X_LINEA) {
+		return ERROR;
+	}
+
+	pal palabrasActualizadas =
+		AddPalPos(palabras, posicionPalabra - 1, palabraAIngresar);
+	insertarPalenLinea(auxLin, palabrasActualizadas);
+	return OK;
 }
 
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
@@ -151,7 +147,7 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
-	
+	imprimirLinea(e->lin);
 
 
 	return NO_IMPLEMENTADA;
@@ -193,4 +189,3 @@ TipoRetorno DestruirEditor(editor & e){
 // Destruye la estructura editor y libera la memoria asociada.
 	return NO_IMPLEMENTADA;
 }
-

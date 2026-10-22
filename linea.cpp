@@ -73,7 +73,7 @@ linea antLinea(linea l){
 }
 
 bool existeLinea(Posicion contL,Posicion posicionLinea) {
-   return contL + 1 >= posicionLinea;
+   return contL >= posicionLinea;
 }
 
 linea buscarLinea(linea l, Posicion x){ 
@@ -91,3 +91,14 @@ linea insertarPalenLinea(linea l, pal p) {
     return l;
 }
 
+void imprimirLinea(linea l){ 
+    linea aux = l;
+    Posicion i = 0;
+    while(aux != NULL){
+        i++;
+        printf("%d) ", i);
+        ImprimirPal(aux->palabra);
+        printf("\n");
+        aux = aux->sig;
+    }
+}

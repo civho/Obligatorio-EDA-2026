@@ -32,6 +32,9 @@ pal PalSig(pal p){
 }
 	
 pal AddPalPos(pal p,Posicion x,Cadena palabra){
+	if (x > cantPal(p)){
+		return p;
+	}
 	if (x==0){
 		p=consPal(p,palabra);
 		return p;
@@ -97,8 +100,8 @@ Posicion cantPal(pal p){
 	Posicion cont=0;
 	while (p!=NULL){
 		cont++;
+		p = p->sig;
 	}
 return cont;
 }
-
 
