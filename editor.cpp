@@ -112,10 +112,22 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
 	if(existeLinea(e->contL, posicionLinea)){
+
 		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
-		pal auxPal = AddPalPos(obtenerPal(auxLin), posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
-		if(auxPal != NULL){
-			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
+
+		if(posicionPalabra == cantPal(obtenerPal(auxLin)) + 1 && MAX_CANT_PALABRAS_X_LINEA >= posicionPalabra){
+			 //se asegura que la posicion de insersion de palabra sea correcta
+			 
+			pal auxPal = AddPalPos(obtenerPal(auxLin), posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
+
+				if(auxPal != NULL){
+					auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
+				}else {
+					return ERROR; //devuelve un error si la palabra no se ingreso
+				}
+		}else {
+
+		return ERROR; //devuelve un error si la posicion ingresada es erronea
 		}
 		return OK;
 	}else {
