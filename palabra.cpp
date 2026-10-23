@@ -2,6 +2,7 @@
 #include "palabra.h"
 #include <string.h>
 #include <stdio.h>
+#include "linea.h"
 
 int MAX_PAL=20;
 
@@ -100,4 +101,32 @@ Posicion cantPal(pal p){
 		p = p->sig;
 	}
 return cont;
+}
+
+bool PosicionValidaPal(Posicion x,pal p){
+	if (x>MAX_CANT_PALABRAS_X_LINEA){
+		return false;
+	}else if(x<=cantPal(p)+1){
+		return true;
+	}else {
+		return false;
+	}
+}
+//Si da error leer el #define MAX_CANT_PALABRAS_X_LINEA 3.
+
+linea correrPalOverflow(linea l,pal p){
+		if (PalSig(p)==NULL){
+			if (sigLinea(l)!=NULL){
+				l=sigLinea(l);
+			} else {
+				snocLinea(l);
+				l=sigLinea(l);
+			}
+			pal aux=l->palabra;
+			l->palabra=p;
+			p->sig=aux;
+			return NULL;
+		} else {
+			p=correrPalOverflow(l,PalSig(p));
+		}
 }

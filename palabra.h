@@ -1,5 +1,6 @@
 #include "definiciones.h"
 #include "editor.h"
+#include "linea.h"
 
 typedef struct nodo_pal * pal;
 
@@ -34,3 +35,10 @@ Posicion cantPal(pal p);
 
 void ImprimirPal(pal p);
 // imprime la palabra 
+
+bool PosicionValidaPal(Posicion x,pal p);
+//Chequea si la Posicion x ingresada es valida.
+
+linea correrPalOverflow(linea l,pal p);
+//PRE:Linea no vacia,pal con max palabras
+//Hace las asignaciones correspondientes.
