@@ -18,14 +18,17 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	linea lin = NULL; 
-	buffer buf = NULL; // las 3 ultimas letras
-	Posicion contL = 0;
+	linea lin ; 
+	buffer buf ; // las 3 ultimas letras
+	Posicion contL;
 };
 
 editor CrearEditor(){
 // Crea la estructura editor.
-	editor e = new(nodo_editor);
+	editor e = new nodo_editor;
+	e->buf=crearBuffer();
+	e->lin=NULL;
+	e->contL=0;
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
 	return e;
@@ -35,7 +38,7 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	e->lin = consLinea(e->lin);
+	e->lin = snocLinea(e->lin);
 	e->contL ++;
 	return OK;
 }
@@ -111,25 +114,26 @@ TipoRetorno ComprimirTexto(editor & e){
 	return NO_IMPLEMENTADA;
 }
 
-TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
+TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	if(existeLinea(e->contL, posicionLinea)){
+printf("aaa");
+if(existeLinea(e->contL, posicionLinea)){
+	
+	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
+	if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLin))){
+		//se asegura que la posicion de insersion de palabra sea correcta
 		
-		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
-		if(posicionPalabra == cantPal(obtenerPal(auxLin)) + 1 && MAX_CANT_PALABRAS_X_LINEA >= posicionPalabra){
-				printf("aaa");
-				 //se asegura que la posicion de insersion de palabra sea correcta
+		pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
+		
+		if(auxPal != NULL){
+			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
 
-				pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
-
-					if(auxPal != NULL){
-						auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
 					}else {
 						return ERROR; //devuelve un error si la palabra no se ingreso
 					}
 			}else {
-
+				
 			return ERROR; //devuelve un error si la posicion ingresada es erronea
 			}
 			return OK;
@@ -155,9 +159,9 @@ TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
 
-	if(existeLinea(e->contL, posicionLinea - 1)) {
+	if(existeLinea(e->contL, posicionLinea)) {
 		linea aux = buscarLinea(e->lin, posicionLinea);
-		imprimirLinea(aux);
+		imprimirLinea(aux, posicionLinea);
 		return OK;
 	}
 

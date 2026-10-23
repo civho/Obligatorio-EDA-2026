@@ -1,8 +1,8 @@
 #include "definiciones.h"
+#include "linea.h"
 #include "palabra.h"
 #include <string.h>
 #include <stdio.h>
-#include "linea.h"
 
 int MAX_PAL=20;
 
@@ -33,7 +33,7 @@ pal PalSig(pal p){
 }
 	
 pal AddPalPos(pal p,Posicion x,Cadena palabra){
-	if (x==0){
+	if (x==1){
 		p=consPal(p,palabra);
 		return p;
 	}else {
@@ -114,19 +114,19 @@ bool PosicionValidaPal(Posicion x,pal p){
 }
 //Si da error leer el #define MAX_CANT_PALABRAS_X_LINEA 3.
 
-linea correrPalOverflow(linea l,pal p){
-		if (PalSig(p)==NULL){
-			if (sigLinea(l)!=NULL){
-				l=sigLinea(l);
-			} else {
-				snocLinea(l);
-				l=sigLinea(l);
-			}
-			pal aux=l->palabra;
-			l->palabra=p;
-			p->sig=aux;
-			return NULL;
-		} else {
-			p=correrPalOverflow(l,PalSig(p));
-		}
-}
+// linea correrPalOverflow(linea l,pal p){
+// 		if (PalSig(p)==NULL){
+// 			if (sigLinea(l)!=NULL){
+// 				l=sigLinea(l);
+// 			} else {
+// 				snocLinea(l);
+// 				l=sigLinea(l);
+// 			}
+// 			pal aux=l->palabra;
+// 			l->palabra=p;
+// 			p->sig=aux;
+// 			return NULL;
+// 		} else {
+// 			l=correrPalOverflow(l,PalSig(l->palabra));
+// 		}
+// }

@@ -18,7 +18,7 @@ linea borrarLinea(linea l);
 linea sigLinea(linea l), lienaAnt(linea l);
 // devuelve la siguiete linea
 
-void imprimirLinea(linea l);
+void imprimirLinea(linea l, Posicion x);
 // imprime todas las linas 
 
 bool existeLinea(Posicion contL,Posicion posicionLinea);

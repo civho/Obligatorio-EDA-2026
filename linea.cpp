@@ -28,18 +28,22 @@ linea snocLinea(linea l){
     return l;
 }
 linea consLinea(linea l) {
-     linea aux = new nodo_linea;
-    aux->palabra = NULL;
     if(l == NULL){ 
+        linea aux = new nodo_linea;
+        aux->palabra = NULL;
         aux->sig = aux;
         aux->ant = aux;
         l = aux;
+        return l;
     }else {
+        linea aux = new nodo_linea;
+        aux->palabra = NULL;
         aux->sig = l;
         aux->ant = l->ant;
         l->ant->sig = aux;
         l->ant = aux;      
         l=aux;  
+        return l;
     }
     return l;
 }
@@ -47,7 +51,7 @@ linea consLinea(linea l) {
 linea borrarLinea(linea l) {
     
     if(l->palabra != NULL){
-       l->palabra = NULL; //Borrar palabra
+       l->palabra = DeleteAllPal(l->palabra); //Borrar palabra
     }
     if(l->ant != l){ 
         linea aux = l;
@@ -76,10 +80,16 @@ bool existeLinea(Posicion contL,Posicion posicionLinea) {
    return contL >= posicionLinea;
 }
 
-linea buscarLinea(linea l, Posicion x){ 
-    for(Posicion i = 1; i < x; i++){
-			l = sigLinea(l);
-		}
+linea buscarLinea(linea l, Posicion x){
+    if(l == NULL) {
+        return NULL;
+    }
+    if(x > 1){
+        for(Posicion i = 1; i < x; i++){
+                l = sigLinea(l);
+            }
+            
+        }
         return l;
 }
 
@@ -91,17 +101,12 @@ linea insertarPalenLinea(linea l, pal p) {
     return l;
 }
 
-void imprimirLinea(linea l){ 
+void imprimirLinea(linea l, Posicion x){ 
     linea aux = l;
-    Posicion i = 0;
-
-        do {
-            i++;
-            printf("%d: ", i);
+            printf("%d: ", x);
             ImprimirPal(aux->palabra);
             printf("\n");
             aux = aux->sig;
     
-        }while(aux != l);
-    
 }
+
