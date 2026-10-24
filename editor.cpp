@@ -146,7 +146,19 @@ if(existeLinea(e->contL, posicionLinea)){
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if(existeLinea(e->contL, posicionLinea)){ // valida posicion de linea
+		linea auxLinea = buscarLinea(e->lin, posicionLinea); // guarda la linea deseada
+		if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLinea))){ // valida posicion palabra
+			pal auxPal = BorrarPalPos(obtenerPal(auxLinea),posicionPalabra); // lista de palabras con la palabra borrada
+			insertarPalenLinea(auxLinea, auxPal); // agrega la primera palabra de una lista de palabaras en una Linea 
+			return OK;
+		}else {
+			return ERROR; // si la posicion de la palabra es incorrecta
+		}
+	}else {
+		return ERROR; // sia la posicion de la linea es incorrecta
+	};
+	return ERROR; // error fatal
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, Cadena palabraABorrar){

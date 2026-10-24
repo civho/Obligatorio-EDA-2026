@@ -44,7 +44,7 @@ pal AddPalPos(pal p,Posicion x,Cadena palabra){
 //Falta chequear que el X es valido,y como manejar el error
 
 pal BorrarPalPos(pal p,Posicion x){
-	if (x==0){
+	if (x==1){
 		pal aux=PalSig(p);
 		delete p;
 		return aux;
