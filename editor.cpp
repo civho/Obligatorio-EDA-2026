@@ -99,10 +99,15 @@ TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 TipoRetorno ImprimirTexto(editor & e){
 // Imprime el texto por pantalla.
 // Ver más detalles en la letra del obligatorio.
-	
-
-
-	return NO_IMPLEMENTADA;
+	if(e->contL == 0) {
+		printf("Texto vacio\n");
+	}else{
+		for(Posicion i = 1; i <= e->contL; i++) {
+			linea aux = buscarLinea(e->lin, i);
+			imprimirLinea(aux);
+		}
+	}
+	return OK;
 }
 
 TipoRetorno ComprimirTexto(editor & e){
