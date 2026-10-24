@@ -152,6 +152,12 @@ TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionP
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en la línea indicada.
 // Ver más detalles en la letra del obligatorio.
+if(existeLinea(e->contL, posicionLinea)){
+	linea auxLin = buscarLinea(e->lin, posicionLinea);
+	pal auxPal=obtenerPal(auxLin);
+	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);
+	auxLin=insertarPalenLinea(auxLin,auxPal);
+	}
 	return NO_IMPLEMENTADA;
 }
 

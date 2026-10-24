@@ -8,7 +8,7 @@ int MAX_PAL=20;
 
 struct nodo_pal {
     pal sig;
-    Cadena palabra;
+    Cadena palabra=NULL;
 };
 
 pal CrearPalabra(){
@@ -55,9 +55,6 @@ pal BorrarPalPos(pal p,Posicion x){
 		return p;
 }	
 
-pal BorrarPalPalabra(pal p,Cadena palabra);
-//Borra el nodo pal si es igual a la palabra ingresada
-
 pal DeleteAllPal(pal p){
 	if (p==NULL){
 		return NULL;
@@ -73,7 +70,7 @@ pal DeleteAllPal(pal p){
 pal consPal(pal p, Cadena palabra){
 	Cadena auxpal = new char[MAX_PAL];
 	pal aux = new(nodo_pal);
-		aux->sig = PalSig(p);
+		aux->sig = p;
 	aux->palabra=auxpal;
 	strcpy(aux->palabra,palabra);
 	return aux;
@@ -130,3 +127,29 @@ bool PosicionValidaPal(Posicion x,pal p){
 // 			l=correrPalOverflow(l,PalSig(l->palabra));
 // 		}
 // }
+
+pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
+	if (p==NULL){
+		return NULL;
+	} else {
+		if (strcmp(p->palabra,palabra)==0){
+			pal aux;
+			aux=p;
+			p=PalSig(p);
+			p=BorrarOcurrenciasPalabra(p,palabra);
+			EliminarPal(aux);
+			return p;
+		} else {
+			p->sig=BorrarOcurrenciasPalabra(PalSig(p),palabra);
+			return p;
+		}
+	}
+}
+
+void EliminarPal(pal & p){
+	if (p!=NULL){
+	delete[] p->palabra;
+	delete p;
+	p=NULL;
+	}
+}
