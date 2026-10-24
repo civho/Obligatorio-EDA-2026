@@ -194,7 +194,12 @@ TipoRetorno ImprimirTextoIncorrecto(editor & e){
 TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	buffer aux = e->buf;
+	while(aux != NULL){
+		printf("%s\n", aux->palabra);
+		aux = aux->sig;
+	}
+	return OK;
 }
 
 TipoRetorno DestruirEditor(editor & e){
