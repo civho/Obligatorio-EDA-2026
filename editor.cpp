@@ -96,9 +96,16 @@ TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en el texto.
 // Ver más detalles en la letra del obligatorio.
 Posicion cont=1;
-
-
-	return NO_IMPLEMENTADA;
+linea auxLin=e->lin;
+pal auxPal;
+while (existeLinea(e->contL, cont)){							//Aplico la misma logica que BorrarOcurrenciasPalabraEnLinea, pero iterando a traves de los nodo linea
+	auxPal=obtenerPal(auxLin);
+	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);
+	auxLin=insertarPalenLinea(auxLin,auxPal);
+	auxLin=sigLinea(auxLin);
+	cont++;
+}
+return OK;
 }
 
 TipoRetorno ImprimirTexto(editor & e){
@@ -162,6 +169,7 @@ if(existeLinea(e->contL, posicionLinea)){
 	return OK;
 } else {
 	return ERROR;
+}
 }
 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
