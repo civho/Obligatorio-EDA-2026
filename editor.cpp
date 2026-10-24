@@ -95,6 +95,8 @@ TipoRetorno BorrarTodo(editor & e){
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en el texto.
 // Ver más detalles en la letra del obligatorio.
+Posicion cont=1;
+
 
 	return NO_IMPLEMENTADA;
 }
@@ -153,12 +155,13 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, 
 // Borra todas las ocurrencias de una palabra en la línea indicada.
 // Ver más detalles en la letra del obligatorio.
 if(existeLinea(e->contL, posicionLinea)){
-	linea auxLin = buscarLinea(e->lin, posicionLinea);
-	pal auxPal=obtenerPal(auxLin);
-	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);
-	auxLin=insertarPalenLinea(auxLin,auxPal);
-	}
-	return NO_IMPLEMENTADA;
+	linea auxLin = buscarLinea(e->lin, posicionLinea);						//Consigo nodo linea donde debo borrar pal
+	pal auxPal=obtenerPal(auxLin);											//De ese nodo linea copio el primero de sus nodo pal
+	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);					//Borro las palabras(si hay) que me pasaron,libero memoria,re asigno punteros.
+	auxLin=insertarPalenLinea(auxLin,auxPal);								//Como el puntero que cambie fue una copia, tengo que reasignarlo al original
+	return OK;
+} else {
+	return ERROR;
 }
 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
