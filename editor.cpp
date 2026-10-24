@@ -201,7 +201,12 @@ TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Ver más detalles en la letra del obligatorio.
 	buffer aux = e->buf;
 	while(aux != NULL){
-		printf("%s\n", aux->palabra);
+		int i = 0;
+		while (aux->palabra[i]!='\0'){
+			printf("%c", aux->palabra[i]);
+			i++;
+		}
+		printf(" ");
 		aux = aux->sig;
 	}
 	return OK;
