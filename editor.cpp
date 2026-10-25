@@ -174,8 +174,8 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
-	insertaraPalabraDic(e->dic, palabraAIngresar);
-	return OK;
+	return NO_IMPLEMENTADA;
+}
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
