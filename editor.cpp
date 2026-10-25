@@ -174,7 +174,8 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	insertaraPalabraDic(e->dic, palabraAIngresar);
+	return OK;
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
@@ -187,7 +188,15 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	dic aux = e->dic;
+	if(vacioDic(aux)){
+		printf("Diccionario vacio\n");
+	}else{
+		imprimirDiccionario(izDic(aux));
+		printf("%s\n", raizDic(aux));
+		imprimirDiccionario(deDic(aux));
+	}
+	return OK;
 }
 
 TipoRetorno ImprimirTextoIncorrecto(editor & e){
