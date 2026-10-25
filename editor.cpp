@@ -176,7 +176,6 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Ver más detalles en la letra del obligatorio.
 	return NO_IMPLEMENTADA;
 }
-}
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
 // Borra una palabra del diccionario.
