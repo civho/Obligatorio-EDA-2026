@@ -8,6 +8,7 @@
 #include "linea.h"
 #include "buffer.h"
 #include "palabra.h"
+#include "diccionario.h"
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
