@@ -13,6 +13,7 @@
 #include <string.h>
 #include <iostream>
 
+
 using namespace std;
 
 struct nodo_editor{
@@ -198,7 +199,7 @@ TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 
 	if(existeLinea(e->contL, posicionLinea)) {
 		linea aux = buscarLinea(e->lin, posicionLinea);
-		imprimirLinea(aux, posicionLinea);
+		imprimirLinea(aux, posicionLinea); 
 		return OK;
 	}
 
@@ -210,6 +211,8 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
+
+
 		if(insertarPalDic(e->diccionario, palabraAIngresar)){
 			return OK; // se creo sin problemas
 		}else {
@@ -228,7 +231,12 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA; 
+	if(vacioDic(e->diccionario)){ 
+		printf("Diccionario Vacio");
+    }else{
+		imprimirDic(e->diccionario); 
+	}
+	return OK; 
 }
 
 TipoRetorno ImprimirTextoIncorrecto(editor & e){

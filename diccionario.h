@@ -16,3 +16,6 @@ bool vacioDic(dic d);
 
 bool insertarPalDic(dic  & d, Cadena palabra);
 // inserta la palabra ordenadamente en el diccionario
+
+void imprimirDic(dic d);
+// pre imprime los datos de el diccionario, si esta vacio devuelve "diccionario vacio"
