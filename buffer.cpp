@@ -9,14 +9,22 @@ struct nodo_buffer{
 };
 
 buffer crearBuffer(){
-// Crea una nuevo buffer vacio
+    // Crea una nuevo buffer vacio
     buffer b = NULL;
     return b;
 }
 
+buffer SigB(buffer b){
+    return b->sig;
+}
+
+bool IsEmpty(buffer b){
+    return b == NULL;
+}
+
 buffer AgBuffer(buffer b, Cadena pal){
-// Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
-       if (b == NULL){    
+    // Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
+    if (b == NULL){    
         buffer aux = new(nodo_buffer);
         strcpy(aux->palabra, pal);
         aux->sig = NULL;
@@ -52,4 +60,8 @@ buffer AgBuffer(buffer b, Cadena pal){
             return aux; 
         }
     }
+}
+
+void imprimeirBuffer(buffer b){
+    printf("%s\n", b->palabra);
 }
