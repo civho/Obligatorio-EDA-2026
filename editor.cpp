@@ -8,6 +8,7 @@
 #include "linea.h"
 #include "buffer.h"
 #include "palabra.h"
+#include "diccionario.h"
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
@@ -21,14 +22,16 @@ struct nodo_editor{
 	linea lin ; 
 	buffer buf ; // las 3 ultimas letras
 	Posicion contL;
+	dic diccionario;
 };
 
 editor CrearEditor(){
 // Crea la estructura editor.
 	editor e = new nodo_editor;
 	e->buf=crearBuffer();
-	e->lin=NULL;
+	e->lin=crearLinea();
 	e->contL=0;
+	e->diccionario = crearDic();
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
 	return e;
@@ -146,7 +149,19 @@ if(existeLinea(e->contL, posicionLinea)){
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if(existeLinea(e->contL, posicionLinea)){ // valida posicion de linea
+		linea auxLinea = buscarLinea(e->lin, posicionLinea); // guarda la linea deseada
+		if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLinea))){ // valida posicion palabra
+			pal auxPal = BorrarPalPos(obtenerPal(auxLinea),posicionPalabra); // lista de palabras con la palabra borrada
+			insertarPalenLinea(auxLinea, auxPal); // agrega la primera palabra de una lista de palabaras en una Linea 
+			return OK;
+		}else {
+			return ERROR; // si la posicion de la palabra es incorrecta
+		}
+	}else {
+		return ERROR; // sia la posicion de la linea es incorrecta
+	};
+	return ERROR; // error fatal
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, Cadena palabraABorrar){
@@ -173,7 +188,10 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	e->diccionario = insertaraPalabraDic(e->diccionario,palabraAIngresar);
+	
+	return OK;
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
