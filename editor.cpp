@@ -247,15 +247,13 @@ TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
 	buffer aux = e->buf;
-	if(aux == NULL){
+	if(IsEmpty(aux)){
 		printf("No se ingresaron palabras\n");
 	}else{
-		while(aux != NULL){
-			printf("%s", aux->palabra);
-			printf(" ");
-			aux = aux->sig;
+		while (!IsEmpty(aux)){
+			imprimirBuffer(aux);
+			aux = SigB(aux);
 		}
-		printf("\n");
 	}
 	return OK;
 }
