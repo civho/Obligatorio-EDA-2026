@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 
-struct nodo_diccionario{
+struct arbol_diccionario{
     dic iz, de;
     Cadena pal;
 };
+
+
 
 
 dic crearDic(){
@@ -25,24 +27,25 @@ bool vacioDic(dic d) {
     return d == NULL;
 }
 
-dic insertaraPalabraDic(dic d, Cadena palabra) {
+bool insertarPalDic(dic & d, Cadena palabra) {
     if (d == NULL) {
-        dic aux = new nodo_diccionario;
+        dic aux = new arbol_diccionario;
         aux->iz = NULL;
         aux->de = NULL;
-        aux->pal = new char[strlen(palabra) + 1];
+        aux->pal = new char[strlen(palabra) + 1]; //copia el string a pal
             strcpy(aux->pal, palabra);
-        return aux;
+        d=aux;
+       return true;
     } else {
         int comparar = strcmp(d->pal, palabra);
         if (comparar < 0){
-            d->iz = insertaraPalabraDic(d->iz, palabra);
-            return d;
+            return  insertarPalDic(d->iz, palabra);;
+
         } else if (comparar > 0) {
-            d->de = insertaraPalabraDic(d->de, palabra);
-            return d;
-        } else if (comparar == 0) {
-            return d;
+            return insertarPalDic(d->de, palabra);;
+            
+        } else if (comparar == 0) { // si la palabara ya existe
+            return false;
         }
     }
     return NULL;
