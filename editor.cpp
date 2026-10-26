@@ -8,6 +8,7 @@
 #include "linea.h"
 #include "buffer.h"
 #include "palabra.h"
+#include "diccionario.h"
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
@@ -18,14 +19,19 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	linea lin = NULL; 
-	buffer buf = NULL; // las 3 ultimas letras
-	Posicion contL = 0;
+	linea lin ; 
+	buffer buf ; // las 3 ultimas letras
+	Posicion contL;
+	dic diccionario;
 };
 
 editor CrearEditor(){
 // Crea la estructura editor.
-	editor e = new(nodo_editor);
+	editor e = new nodo_editor;
+	e->buf=crearBuffer();
+	e->lin=crearLinea();
+	e->contL=0;
+	e->diccionario = crearDic();
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
 	return e;
@@ -35,7 +41,7 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	e->lin = consLinea(e->lin);
+	e->lin = snocLinea(e->lin);
 	e->contL ++;
 	return OK;
 }
@@ -92,8 +98,17 @@ TipoRetorno BorrarTodo(editor & e){
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en el texto.
 // Ver más detalles en la letra del obligatorio.
-
-	return NO_IMPLEMENTADA;
+Posicion cont=1;
+linea auxLin=e->lin;
+pal auxPal;
+while (existeLinea(e->contL, cont)){							//Aplico la misma logica que BorrarOcurrenciasPalabraEnLinea, pero iterando a traves de los nodo linea
+	auxPal=obtenerPal(auxLin);
+	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);
+	auxLin=insertarPalenLinea(auxLin,auxPal);
+	auxLin=sigLinea(auxLin);
+	cont++;
+}
+return OK;
 }
 
 TipoRetorno ImprimirTexto(editor & e){
@@ -116,25 +131,26 @@ TipoRetorno ComprimirTexto(editor & e){
 	return NO_IMPLEMENTADA;
 }
 
-TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
+TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	if(existeLinea(e->contL, posicionLinea)){
+printf("aaa");
+if(existeLinea(e->contL, posicionLinea)){
+	
+	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
+	if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLin))){
+		//se asegura que la posicion de insersion de palabra sea correcta
 		
-		linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
-		if(posicionPalabra == cantPal(obtenerPal(auxLin)) + 1 && MAX_CANT_PALABRAS_X_LINEA >= posicionPalabra){
-				printf("aaa");
-				 //se asegura que la posicion de insersion de palabra sea correcta
+		pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
+		
+		if(auxPal != NULL){
+			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
 
-				pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
-
-					if(auxPal != NULL){
-						auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
 					}else {
 						return ERROR; //devuelve un error si la palabra no se ingreso
 					}
 			}else {
-
+				
 			return ERROR; //devuelve un error si la posicion ingresada es erronea
 			}
 			return OK;
@@ -147,22 +163,42 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if(existeLinea(e->contL, posicionLinea)){ // valida posicion de linea
+		linea auxLinea = buscarLinea(e->lin, posicionLinea); // guarda la linea deseada
+		if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLinea))){ // valida posicion palabra
+			pal auxPal = BorrarPalPos(obtenerPal(auxLinea),posicionPalabra); // lista de palabras con la palabra borrada
+			insertarPalenLinea(auxLinea, auxPal); // agrega la primera palabra de una lista de palabaras en una Linea 
+			return OK;
+		}else {
+			return ERROR; // si la posicion de la palabra es incorrecta
+		}
+	}else {
+		return ERROR; // sia la posicion de la linea es incorrecta
+	};
+	return ERROR; // error fatal
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en la línea indicada.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+if(existeLinea(e->contL, posicionLinea)){
+	linea auxLin = buscarLinea(e->lin, posicionLinea);						//Consigo nodo linea donde debo borrar pal
+	pal auxPal=obtenerPal(auxLin);											//De ese nodo linea copio el primero de sus nodo pal
+	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);					//Borro las palabras(si hay) que me pasaron,libero memoria,re asigno punteros.
+	auxLin=insertarPalenLinea(auxLin,auxPal);								//Como el puntero que cambie fue una copia, tengo que reasignarlo al original
+	return OK;
+} else {
+	return ERROR;
+}
 }
 
 TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
 
-	if(existeLinea(e->contL, posicionLinea - 1)) {
+	if(existeLinea(e->contL, posicionLinea)) {
 		linea aux = buscarLinea(e->lin, posicionLinea);
-		imprimirLinea(aux);
+		imprimirLinea(aux, posicionLinea);
 		return OK;
 	}
 
@@ -174,7 +210,10 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	e->diccionario = insertaraPalabraDic(e->diccionario,palabraAIngresar);
+	
+	return OK;
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){

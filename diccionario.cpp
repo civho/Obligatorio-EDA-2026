@@ -25,22 +25,25 @@ bool vacioDic(dic d) {
     return d == NULL;
 }
 
-dic insertaraPalabraDic(dic d, Cadena palabra){
-    int comparar = strcmp(d->pal, palabra);
-    if(vacioDic(d)){
+dic insertaraPalabraDic(dic d, Cadena palabra) {
+    if (d == NULL) {
         dic aux = new nodo_diccionario;
-        aux -> iz = NULL;
-        aux -> de = NULL;
-        aux -> pal = palabra;
+        aux->iz = NULL;
+        aux->de = NULL;
+        aux->pal = new char[strlen(palabra) + 1];
+            strcpy(aux->pal, palabra);
         return aux;
-    }else if(comparar < 0) {
-        d -> iz = insertaraPalabraDic(d-> iz, palabra);
-        return d;
-    }else if (comparar > 0){
-        d -> de = insertaraPalabraDic(d-> de, palabra);
-        return d;
-    }else if(comparar == 0){
-        return d;
+    } else {
+        int comparar = strcmp(d->pal, palabra);
+        if (comparar < 0){
+            d->iz = insertaraPalabraDic(d->iz, palabra);
+            return d;
+        } else if (comparar > 0) {
+            d->de = insertaraPalabraDic(d->de, palabra);
+            return d;
+        } else if (comparar == 0) {
+            return d;
+        }
     }
-    
+    return NULL;
 }

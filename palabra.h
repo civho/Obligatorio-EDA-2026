@@ -20,9 +20,6 @@ pal BorrarPalPos(pal p,Posicion x);
 //PRE:Posicion valida.
 //POS:Borra el nodo pal en la posicion x.
 
-pal BorrarPalPalabra(pal p,Cadena palabra);
-//POS:Borra el nodo pal si es igual a la palabra ingresada.
-
 pal DeleteAllPal(pal p);
 //POS:Dado un nodo palabra, borra todos los nodos y libera memoria.
 
@@ -34,3 +31,16 @@ Posicion cantPal(pal p);
 
 void ImprimirPal(pal p);
 // imprime la palabra 
+
+bool PosicionValidaPal(Posicion x,pal p);
+//Chequea si la Posicion x ingresada es valida.
+
+// linea correrPalOverflow(linea l,pal p);
+// //PRE:Linea no vacia,pal con max palabras
+// //Hace las asignaciones correspondientes.
+
+pal BorrarOcurrenciasPalabra(pal p, Cadena palabra);
+//POS:Devuelve una lista de nodos palabra eliminando y liberando de memoria las que tengan la palabra dada.
+
+void EliminarPal(pal & p);
+//POS:Elimina y libera memoria de p.
