@@ -1,6 +1,6 @@
 #include "definiciones.h"
 
-typedef struct nodo_diccionario * dic;
+typedef struct arbol_diccionario * dic;
 
 dic crearDic();
 //retorna NULL
@@ -14,4 +14,5 @@ dic izDic(dic d);
 bool vacioDic(dic d);
 // retorna true si d esta, vacio false si no
 
-dic insertaraPalabraDic(dic d, Cadena palabra);
+bool insertarPalDic(dic  & d, Cadena palabra);
+// inserta la palabra ordenadamente en el diccionario

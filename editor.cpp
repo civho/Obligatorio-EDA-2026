@@ -119,7 +119,7 @@ TipoRetorno ImprimirTexto(editor & e){
 	}else{
 		for(Posicion i = 1; i <= e->contL; i++) {
 			linea aux = buscarLinea(e->lin, i);
-			imprimirLinea(aux);
+			imprimirLinea(aux, i);
 		}
 	}
 	return OK;
@@ -210,10 +210,12 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Agrega una palabra al diccionario.
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
-
-	e->diccionario = insertaraPalabraDic(e->diccionario,palabraAIngresar);
-	
-	return OK;
+		if(insertarPalDic(e->diccionario, palabraAIngresar)){
+			return OK; // se creo sin problemas
+		}else {
+			return ERROR; // palabra ya existe
+		}
+	return ERROR;
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
@@ -226,15 +228,7 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	dic aux = e->dic;
-	if(vacioDic(aux)){
-		printf("Diccionario vacio\n");
-	}else{
-		imprimirDiccionario(izDic(aux));
-		printf("%s\n", raizDic(aux));
-		imprimirDiccionario(deDic(aux));
-	}
-	return OK;
+	return NO_IMPLEMENTADA; 
 }
 
 TipoRetorno ImprimirTextoIncorrecto(editor & e){
@@ -246,18 +240,8 @@ TipoRetorno ImprimirTextoIncorrecto(editor & e){
 TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
-	buffer aux = e->buf;
-	if(aux == NULL){
-		printf("No se ingresaron palabras\n");
-	}else{
-		while(aux != NULL){
-			printf("%s", aux->palabra);
-			printf(" ");
-			aux = aux->sig;
-		}
-		printf("\n");
-	}
-	return OK;
+
+	return NO_IMPLEMENTADA;
 }
 
 TipoRetorno DestruirEditor(editor & e){
