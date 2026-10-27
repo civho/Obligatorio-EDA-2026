@@ -68,6 +68,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 			}
 
 		}
+			e->contL ++;
 			return OK;
 
 	}
@@ -135,7 +136,6 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-printf("aaa");
 if(existeLinea(e->contL, posicionLinea)){
 	
 	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada

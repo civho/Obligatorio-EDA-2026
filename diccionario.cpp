@@ -27,6 +27,18 @@ bool vacioDic(dic d) {
     return d == NULL;
 }
 
+
+Cadena aMayuscula(Cadena palabra) {
+    Cadena auxPal = new char[strlen(palabra) + 1]; 
+        strcpy(auxPal, palabra);
+        int cantPal = strlen(auxPal) + 1; 
+        for (int i = 0; i < cantPal; i++){
+            auxPal[i] = toupper(auxPal[i]);
+        }
+        return auxPal;
+}
+
+
 bool insertarPalDic(dic & d, Cadena palabra) {
     
     
@@ -39,18 +51,12 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         d=aux;
         return true;
     } else {
-        Cadena auxPal = new [strlen(palabra) + 1]; 
-        strcpy(auxPal, palabra);
         
-        for (char &c){
-            c = toupper(c);
-        }
-        
-        int comparar = strcmp(d->pal, palabra);
-        if (comparar < 0){
+        int comparar = strcmp(aMayuscula(d->pal),aMayuscula(palabra));
+        if (comparar > 0){
             return  insertarPalDic(d->iz, palabra);;
 
-        } else if (comparar > 0) {
+        } else if (comparar < 0) {
             return insertarPalDic(d->de, palabra);;
             
         } else if (comparar == 0) { // si la palabara ya existe

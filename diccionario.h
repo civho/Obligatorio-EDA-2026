@@ -19,3 +19,7 @@ bool insertarPalDic(dic  & d, Cadena palabra);
 
 void imprimirDic(dic d);
 // pre imprime los datos de el diccionario, si esta vacio devuelve "diccionario vacio"
+
+Cadena aMayuscula(Cadena palabra);
+//pre: palabra no vacia
+//pos: convierte una cadena de caracteres a mayuscula
