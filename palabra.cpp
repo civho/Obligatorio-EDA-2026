@@ -75,9 +75,7 @@ pal consPal(pal p, Cadena palabra){
 	strcpy(aux->palabra,palabra);
 	return aux;
 }
-//Falta ver si esta bien implementear el "ERROR" aca.Tambien chequear que x es menor que MAX PALABRA(por lineas). 
 //MAX PAL habria que declararla? Maximo de letras que entrarian por palabra.
-//No se si el strcpy funciona...
 
 void ImprimirPal(pal p){
 	if (p!=NULL){
@@ -111,22 +109,14 @@ bool PosicionValidaPal(Posicion x,pal p){
 }
 //Si da error leer el #define MAX_CANT_PALABRAS_X_LINEA 3.
 
-// linea correrPalOverflow(linea l,pal p){
-// 		if (PalSig(p)==NULL){
-// 			if (sigLinea(l)!=NULL){
-// 				l=sigLinea(l);
-// 			} else {
-// 				snocLinea(l);
-// 				l=sigLinea(l);
-// 			}
-// 			pal aux=l->palabra;
-// 			l->palabra=p;
-// 			p->sig=aux;
-// 			return NULL;
-// 		} else {
-// 			l=correrPalOverflow(l,PalSig(l->palabra));
-// 		}
-// }
+pal correrPalOverflow(pal p,psigL){
+for (int i=1;i<MAX_CANT_PALABRAS_X_LINEA;i++){
+p=PalSig(p);
+}
+pal aux=PalSig(p);
+p->sig=NULL;
+aux->sig=psig;
+return aux;
 
 pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
 	if (p==NULL){

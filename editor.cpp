@@ -93,8 +93,15 @@ TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 TipoRetorno BorrarTodo(editor & e){
 // Borra todas las líneas del texto.
 // Ver más detalles en la letra del obligatorio.
-
-	return NO_IMPLEMENTADA;
+linea auxLin=e->lin;
+linea iter;
+while (iter!=NULL){
+	iter=sigLinea(auxLin);
+	iter=borrarLinea(iter);
+}
+e->lin=NULL;
+e->contL=0;
+	return OK;
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
