@@ -241,7 +241,26 @@ TipoRetorno ImprimirDiccionario(editor & e){
 TipoRetorno ImprimirTextoIncorrecto(editor & e){
 // Muestra las palabras del texto que no se encuentran en el diccionario.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if (e->contL == 0)
+		return OK;
+	else{
+		for(Posicion i = 1; i <= e->contL; i++){
+			linea aux = buscarLinea(e->lin, i);
+			pal tex = obtenerPal(aux)
+			printf("%d: ", i);
+			while (IsEmptyPal(tex)){
+				if (PerDicc(tex->palabra)){
+					printf(" ");
+					tex = PalSig(tex);
+				}else{
+					printf("%s\n", tex->palabra);
+					tex = PalSig(tex);
+				}
+			}	
+			printf("\n");
+		}
+	}
+	return OK;
 }
 
 TipoRetorno ImprimirUltimasPalabras(editor & e){
