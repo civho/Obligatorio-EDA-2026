@@ -47,3 +47,15 @@ dic insertaraPalabraDic(dic d, Cadena palabra) {
     }
     return NULL;
 }
+
+bool PerDicc(dic d,Cadena pal){
+    int comparar = strcmp(d->pal, palabra);
+    if (comparar < 0){
+        d->iz = insertaraPalabraDic(d->iz, palabra);
+    }else if (comparar > 0) {
+        d->de = insertaraPalabraDic(d->de, palabra);
+    } else if (comparar == 0) {
+        return true;
+    }else 
+        return false;
+}
