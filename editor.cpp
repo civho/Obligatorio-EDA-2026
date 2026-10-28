@@ -153,6 +153,7 @@ if(existeLinea(e->contL, posicionLinea)){
 				
 			return ERROR; //devuelve un error si la posicion ingresada es erronea
 			}
+			agBuffer(e->buf, palabraAIngresar);
 			return OK;
 		}else {
 			return ERROR;
