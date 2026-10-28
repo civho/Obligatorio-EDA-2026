@@ -15,3 +15,5 @@ bool vacioDic(dic d);
 // retorna true si d esta, vacio false si no
 
 dic insertaraPalabraDic(dic d, Cadena palabra);
+
+bool PerDicc(dic d,Cadena pal);
