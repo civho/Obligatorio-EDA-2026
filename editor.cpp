@@ -141,12 +141,12 @@ if(existeLinea(e->contL, posicionLinea)){
 	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
 	if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLin))){
 		//se asegura que la posicion de insersion de palabra sea correcta
-		
 		pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
 		
 		if(auxPal != NULL){
 			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
-
+			// e->buf =  AgBuffer(e->buf, palabraAIngresar);
+			
 					}else {
 						return ERROR; //devuelve un error si la palabra no se ingreso
 					}
@@ -249,7 +249,17 @@ TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
 
-	return NO_IMPLEMENTADA;
+		buffer aux = e->buf;
+	if(IsEmpty(aux)){
+		printf("No se ingresaron palabras\n");
+	}else{
+		while (!IsEmpty(aux)){
+			imprimirBuffer(aux);
+			aux = SigB(aux);
+		}
+	}
+	return OK;
+
 }
 
 TipoRetorno DestruirEditor(editor & e){

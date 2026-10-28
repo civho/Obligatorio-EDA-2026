@@ -29,7 +29,7 @@ bool vacioDic(dic d) {
 
 
 Cadena aMayuscula(Cadena palabra) {
-    Cadena auxPal = new char[strlen(palabra) + 1]; 
+    Cadena auxPal = new char; 
         strcpy(auxPal, palabra);
         int cantPal = strlen(auxPal) + 1; 
         for (int i = 0; i < cantPal; i++){
@@ -46,7 +46,7 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         dic aux = new arbol_diccionario;
         aux->iz = NULL;
         aux->de = NULL;
-        aux->pal = new char[strlen(palabra) + 1]; //copia el string a pal
+        aux->pal = new char; //copia el string a pal
         strcpy(aux->pal, palabra);
         d=aux;
         return true;

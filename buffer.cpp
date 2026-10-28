@@ -15,9 +15,10 @@ buffer crearBuffer(){
 }
 
 buffer AgBuffer(buffer b, Cadena pal){
-// Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
-       if (b == NULL){    
+    // Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
+    if (b == NULL){    
         buffer aux = new(nodo_buffer);
+        aux->palabra = new char;
         strcpy(aux->palabra, pal);
         aux->sig = NULL;
         aux->ant = NULL;
@@ -52,4 +53,16 @@ buffer AgBuffer(buffer b, Cadena pal){
             return aux; 
         }
     }
+}
+
+void imprimirBuffer(buffer b){
+    printf("%s\n", b->palabra);
+}
+
+buffer SigB(buffer b){
+    return b->sig;
+}
+
+bool IsEmpty(buffer b){
+    return b == NULL;
 }
