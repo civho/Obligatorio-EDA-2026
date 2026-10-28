@@ -26,6 +26,7 @@ buffer AgBuffer(buffer b, Cadena pal){
     // Agrega la ultima plabara al buffer y si tiene la cantidad maxima palabras remplaza una palabra del buffer 
     if (b == NULL){    
         buffer aux = new(nodo_buffer);
+        aux->palabra = new char;
         strcpy(aux->palabra, pal);
         aux->sig = NULL;
         aux->ant = NULL;
@@ -39,6 +40,7 @@ buffer AgBuffer(buffer b, Cadena pal){
         }
         if (cantT < MAX_CANT_ULTIMAS_PALABRAS){
             buffer aux = new(nodo_buffer); 
+            aux->palabra = new char;
             strcpy(aux -> palabra, pal);
             aux -> sig = b;
             aux -> ant = NULL;
@@ -46,12 +48,13 @@ buffer AgBuffer(buffer b, Cadena pal){
             return aux;
         }else{
             buffer aux = new(nodo_buffer); 
+            aux->palabra = new char;
             strcpy(aux -> palabra, pal);
             aux -> sig = b;
             aux -> ant = NULL;
-            b -> ant = aux;
             if (iter->ant != NULL) {
                 iter->ant->sig = NULL;
+                b -> ant = aux;
                 delete(iter);
             }else{
                 aux->sig = NULL; 
