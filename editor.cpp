@@ -249,11 +249,11 @@ TipoRetorno ImprimirTextoIncorrecto(editor & e){
 			pal tex = obtenerPal(aux)
 			printf("%d: ", i);
 			while (IsEmptyPal(tex)){
-				if (PerDicc(tex->palabra)){
+				if (PerDicc(ObeTex(tex))){
 					printf(" ");
 					tex = PalSig(tex);
 				}else{
-					printf("%s\n", tex->palabra);
+					printf("%s\n", ObeTex(tex));
 					tex = PalSig(tex);
 				}
 			}	
