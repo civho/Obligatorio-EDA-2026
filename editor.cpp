@@ -152,7 +152,21 @@ if(existeLinea(e->contL, posicionLinea)){
 		
 		if(auxPal != NULL){
 			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
-
+				//Implementacion de correr el excedente de palabras en una linea.	
+			while (cantPal(auxPal)==(MAX_CANT_PALABRAS_X_LINEA+1)){
+				if (posicionLinea==cantL){
+					InsertarLinea;
+				}
+				linea auxLin2=sigLinea(auxLin);
+				pal auxPal2=obtenerPal(auxLin2);
+				auxPal2=CorrerPalOverflow(auxPal,auxPal2);
+				auxLin2=insertarPalenLinea(auxLin2,auxPal2);
+				//Termino con las asignaciones, me muevo en las lineas.
+				posicionLinea++;
+				auxLin=auxLin2;
+				auxPal=auxPal2;
+				//Fin implementacion de correr el excedente de palabras en una linea.
+			}
 					}else {
 						return ERROR; //devuelve un error si la palabra no se ingreso
 					}
