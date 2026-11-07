@@ -119,7 +119,7 @@ TipoRetorno ImprimirTexto(editor & e){
 	}else{
 		for(Posicion i = 1; i <= e->contL; i++) {
 			linea aux = buscarLinea(e->lin, i);
-			imprimirLinea(aux);
+			imprimirLinea(aux, i);
 		}
 	}
 	return OK;
@@ -227,14 +227,14 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	dic aux = e->dic;
-	if(vacioDic(aux)){
-		printf("Diccionario vacio\n");
-	}else{
-		imprimirDiccionario(izDic(aux));
-		printf("%s\n", raizDic(aux));
-		imprimirDiccionario(deDic(aux));
-	}
+	// dic aux = e->dic;
+	// if(vacioDic(aux)){
+	// 	printf("Diccionario vacio\n");
+	// }else{
+	// 	imprimirDiccionario(izDic(aux));
+	// 	printf("%s\n", raizDic(aux));
+	// 	imprimirDiccionario(deDic(aux));
+	// }
 	return OK;
 }
 
@@ -246,14 +246,13 @@ TipoRetorno ImprimirTextoIncorrecto(editor & e){
 	else{
 		for(Posicion i = 1; i <= e->contL; i++){
 			linea aux = buscarLinea(e->lin, i);
-			pal tex = obtenerPal(aux)
-			printf("%d: ", i);
-			while (IsEmptyPal(tex)){
-				if (PerDicc(ObeTex(tex))){
-					printf(" ");
+			pal tex = obtenerPal(aux);
+			printf("%d:", i);
+			while (!IsEmptyPal(tex)){
+				if (PerDicc(e->diccionario,ObeTex(tex))){
 					tex = PalSig(tex);
 				}else{
-					printf("%s\n", ObeTex(tex));
+					printf(" %s", ObeTex(tex));
 					tex = PalSig(tex);
 				}
 			}	

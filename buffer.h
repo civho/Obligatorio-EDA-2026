@@ -14,5 +14,5 @@ bool IsEmpty(buffer b);
 buffer AgBuffer(buffer b, Cadena pal);
 // Agrega la ultima plabara al buffer y si el esta lleno remplaza la palabra por una del buffer
 
-void imprimeirBuffer(buffer b);
+void imprimirBuffer(buffer b);
 //Imprime la Palabra

@@ -65,6 +65,6 @@ buffer AgBuffer(buffer b, Cadena pal){
     }
 }
 
-void imprimeirBuffer(buffer b){
+void imprimirBuffer(buffer b){
     printf("%s\n", b->palabra);
 }
