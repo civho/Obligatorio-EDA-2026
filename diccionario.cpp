@@ -28,17 +28,6 @@ bool vacioDic(dic d) {
 }
 
 
-Cadena aMayuscula(Cadena palabra) {
-    Cadena auxPal = new char; 
-        strcpy(auxPal, palabra);
-        int cantPal = strlen(auxPal) + 1; 
-        for (int i = 0; i < cantPal; i++){
-            auxPal[i] = toupper(auxPal[i]);
-        }
-        return auxPal;
-}
-
-
 bool insertarPalDic(dic & d, Cadena palabra) {
     
     
@@ -52,7 +41,7 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         return true;
     } else {
         
-        int comparar = strcmp(aMayuscula(d->pal),aMayuscula(palabra));
+        int comparar = strcasecmp(d->pal,palabra);
         if (comparar > 0){
             return  insertarPalDic(d->iz, palabra);;
 
@@ -66,28 +55,21 @@ bool insertarPalDic(dic & d, Cadena palabra) {
     return NULL;
 }
 
-bool PerDicc(dic d,Cadena pal){
-    int comparar = strcmp(d->pal, pal);
-    if (comparar < 0){
-        d->iz = insertaraPalabraDic(d->iz, pal);
-    }else if (comparar > 0) {
-        d->de = insertaraPalabraDic(d->de, pal);
-    } else if (comparar == 0) {
-        return true;
-    }
-    return false;
-}
 
 bool PerDicc(dic d,Cadena pal){
-    int comparar = strcmp(d->pal, pal);
-    if (comparar < 0){
-        d->iz = insertaraPalabraDic(d->iz, pal);
-    }else if (comparar > 0) {
-        d->de = insertaraPalabraDic(d->de, pal);
-    } else if (comparar == 0) {
-        return true;
+    if(d == NULL){
+        return false;
+    }else {
+
+        int comparar = strcasecmp(d->pal, pal);
+        if (d != NULL && comparar < 0){
+            return PerDicc(d->iz, pal);
+        }else if (d != NULL && comparar > 0) {
+            return PerDicc(d->de, pal);
+        } else if (d != NULL && comparar == 0) {
+            return true;
+        }
     }
-    return false;
 }
 
 void imprimirDic(dic d) { 

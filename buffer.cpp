@@ -69,18 +69,3 @@ void imprimirBuffer(buffer b){
     printf("%s\n", b->palabra);
 }
 
-void imprimirBuffer(buffer b){
-    printf("%s\n", b->palabra);
-}
-
-void imprimirBuffer(buffer b){
-    printf("%s\n", b->palabra);
-}
-
-buffer SigB(buffer b){
-    return b->sig;
-}
-
-bool IsEmpty(buffer b){
-    return b == NULL;
-}

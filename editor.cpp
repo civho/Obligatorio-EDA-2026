@@ -122,7 +122,6 @@ TipoRetorno ImprimirTexto(editor & e){
 		for(Posicion i = 1; i <= e->contL; i++) {
 			linea aux = buscarLinea(e->lin, i);
 			imprimirLinea(aux, i);
-			imprimirLinea(aux, i);
 		}
 	}
 	return OK;
@@ -276,14 +275,10 @@ TipoRetorno ImprimirUltimasPalabras(editor & e){
 		while (!IsEmpty(aux)){
 			imprimirBuffer(aux);
 			aux = SigB(aux);
-		while (!IsEmpty(aux)){
-			imprimirBuffer(aux);
-			aux = SigB(aux);
 		}
 	}
 	return OK;
-
-}
+	}	
 
 TipoRetorno DestruirEditor(editor & e){
 // Destruye la estructura editor y libera la memoria asociada.
