@@ -35,7 +35,7 @@ void ImprimirPal(pal p);
 bool PosicionValidaPal(Posicion x,pal p);
 //Chequea si la Posicion x ingresada es valida.
 
-pal correrPalOverflow(pal p,psigL);
+pal correrPalOverflow(pal p,pal psigL);
 //PRE:p con nodos max palabras+1, psigL existe y es el primero de los nodos pal de la siguiente linea.
 //POS:Mueve el nodo excedente al inicio de psigL, y retorna esta misma cadena de nodos pal. 
 

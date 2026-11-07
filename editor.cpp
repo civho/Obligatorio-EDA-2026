@@ -92,8 +92,8 @@ TipoRetorno BorrarTodo(editor & e){
 // Borra todas las líneas del texto.
 // Ver más detalles en la letra del obligatorio.
 linea auxLin=e->lin;
-linea iter;
-while (iter!=NULL){
+linea iter = auxLin;
+while (iter != NULL){
 	iter=sigLinea(auxLin);
 	iter=borrarLinea(iter);
 }
@@ -126,7 +126,7 @@ TipoRetorno ImprimirTexto(editor & e){
 	}else{
 		for(Posicion i = 1; i <= e->contL; i++) {
 			linea aux = buscarLinea(e->lin, i);
-			imprimirLinea(aux);
+			imprimirLinea(aux,i);
 		}
 	}
 	return OK;
@@ -154,12 +154,12 @@ if(existeLinea(e->contL, posicionLinea)){
 			auxLin = insertarPalenLinea(auxLin, auxPal); //si la palabra fue agregada inserta la lista de palabras en la linea
 				//Implementacion de correr el excedente de palabras en una linea.	
 			while (cantPal(auxPal)==(MAX_CANT_PALABRAS_X_LINEA+1)){
-				if (posicionLinea==cantL){
-					InsertarLinea;
+				if (posicionLinea==e->contL){
+					InsertarLinea(e);
 				}
 				linea auxLin2=sigLinea(auxLin);
 				pal auxPal2=obtenerPal(auxLin2);
-				auxPal2=CorrerPalOverflow(auxPal,auxPal2);
+				auxPal2=correrPalOverflow(auxPal,auxPal2);
 				auxLin2=insertarPalenLinea(auxLin2,auxPal2);
 				//Termino con las asignaciones, me muevo en las lineas.
 				posicionLinea++;
@@ -247,14 +247,14 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	dic aux = e->dic;
-	if(vacioDic(aux)){
-		printf("Diccionario vacio\n");
-	}else{
-		imprimirDiccionario(izDic(aux));
-		printf("%s\n", raizDic(aux));
-		imprimirDiccionario(deDic(aux));
-	}
+	// dic aux = e->diccionario;
+	// if(vacioDic(aux)){
+	// 	printf("Diccionario vacio\n");
+	// }else{
+	// 	imprimirDiccionario(izDic(aux));
+	// 	printf("%s\n", raizDic(aux));
+	// 	imprimirDiccionario(deDic(aux));
+	// }
 	return OK;
 }
 
@@ -267,17 +267,17 @@ TipoRetorno ImprimirTextoIncorrecto(editor & e){
 TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
-	buffer aux = e->buf;
-	if(aux == NULL){
-		printf("No se ingresaron palabras\n");
-	}else{
-		while(aux != NULL){
-			printf("%s", aux->palabra);
-			printf(" ");
-			aux = aux->sig;
-		}
-		printf("\n");
-	}
+	// buffer aux = e->buf;
+	// if(aux == NULL){
+	// 	printf("No se ingresaron palabras\n");
+	// }else{
+	// 	while(aux != NULL){
+	// 		printf("%s", aux->palabra);
+	// 		printf(" ");
+	// 		aux = aux->sig;
+	// 	}
+	// 	printf("\n");
+	// }
 	return OK;
 }
 

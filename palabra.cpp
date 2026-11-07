@@ -109,15 +109,15 @@ bool PosicionValidaPal(Posicion x,pal p){
 }
 //Si da error leer el #define MAX_CANT_PALABRAS_X_LINEA 3.
 
-pal correrPalOverflow(pal p,psigL){
+pal correrPalOverflow(pal p,pal psigL){
 for (int i=1;i<MAX_CANT_PALABRAS_X_LINEA;i++){
-p=PalSig(p);
+	p=PalSig(p);
 }
 pal aux=PalSig(p);
 p->sig=NULL;
-aux->sig=psig;
+aux->sig=psigL;
 return aux;
-
+}
 pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
 	if (p==NULL){
 		return NULL;
