@@ -2,6 +2,9 @@
 #include "editor.h"
 typedef struct nodo_buffer * buffer; 
 
+void imprimirBuffer(buffer b);
+// imprima una palabra del buffer
+
 buffer crearBuffer();
 // Crea una nuevo buffer vacio
 

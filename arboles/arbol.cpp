@@ -27,7 +27,7 @@ bool arbol_vacio(arbol a){
 }
 
 int max(int x, int y){
-    if(x > iy){
+    if(x > y){
         return x;
     }else {
         return y;
@@ -130,7 +130,7 @@ arbol arbol_buscar(arbol a, int x) {
         if(aux != NULL){
             return aux;
         }else {
-            return arbol_buscar(e->sh,x);
+            return arbol_buscar(a->sh,x);
         }
     }
 
