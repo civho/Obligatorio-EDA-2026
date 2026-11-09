@@ -30,7 +30,7 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         dic aux = new arbol_diccionario;
         aux->iz = NULL;
         aux->de = NULL;
-        aux->pal = new char; //copia el string a pal
+        aux->pal = new char[strlen(palabra) + 1]; //copia el string a pal
         strcpy(aux->pal, palabra);
         d=aux;
         return true;
@@ -48,17 +48,16 @@ bool insertarPalDic(dic & d, Cadena palabra) {
             return false;
         }
     }
-    return NULL;
 }
 
 bool PerDicc(dic d,Cadena pal){
     if(d == NULL)
         return false;
     else{
-        if (d->iz != NULL && strcasecmp(d->pal, pal) < 0)
+        if (d->iz != NULL && strcasecmp(d->pal, pal) > 0)
             return PerDicc(d->iz, pal);
         else{
-			if (d->de != NULL && strcasecmp(d->pal, pal) > 0)
+			if (d->de != NULL && strcasecmp(d->pal, pal) < 0)
             	return PerDicc(d->de, pal);
         	else{ 
 				if (strcasecmp(d->pal, pal) == 0)
