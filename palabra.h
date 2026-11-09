@@ -44,3 +44,6 @@ pal BorrarOcurrenciasPalabra(pal p, Cadena palabra);
 
 void EliminarPal(pal & p);
 //POS:Elimina y libera memoria de p.
+
+Cadena ObeTex(pal p);
+//Retorna la palabra

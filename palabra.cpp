@@ -153,3 +153,7 @@ void EliminarPal(pal & p){
 	p=NULL;
 	}
 }
+
+Cadena ObeTex(pal p){
+	return p->palabra;
+}

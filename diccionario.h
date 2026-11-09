@@ -23,3 +23,4 @@ void imprimirDic(dic d);
 Cadena aMayuscula(Cadena palabra);
 //pre: palabra no vacia
 //pos: convierte una cadena de caracteres a mayuscula
+bool PerDicc(dic d,Cadena pal);

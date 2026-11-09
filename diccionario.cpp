@@ -8,9 +8,6 @@ struct arbol_diccionario{
     Cadena pal;
 };
 
-
-
-
 dic crearDic(){
     return NULL;
 }
@@ -28,20 +25,7 @@ bool vacioDic(dic d) {
 }
 
 
-Cadena aMayuscula(Cadena palabra) {
-    Cadena auxPal = new char; 
-        strcpy(auxPal, palabra);
-        int cantPal = strlen(auxPal) + 1; 
-        for (int i = 0; i < cantPal; i++){
-            auxPal[i] = toupper(auxPal[i]);
-        }
-        return auxPal;
-}
-
-
 bool insertarPalDic(dic & d, Cadena palabra) {
-    
-    
     if (d == NULL) {
         dic aux = new arbol_diccionario;
         aux->iz = NULL;
@@ -52,13 +36,14 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         return true;
     } else {
         
-        int comparar = strcmp(aMayuscula(d->pal),aMayuscula(palabra));
+        int comparar = strcasecmp(d->pal,palabra);
         if (comparar > 0){
             return  insertarPalDic(d->iz, palabra);;
 
         } else if (comparar < 0) {
             return insertarPalDic(d->de, palabra);;
-            
+
+			
         } else if (comparar == 0) { // si la palabara ya existe
             return false;
         }
@@ -66,11 +51,29 @@ bool insertarPalDic(dic & d, Cadena palabra) {
     return NULL;
 }
 
+bool PerDicc(dic d,Cadena pal){
+    if(d == NULL)
+        return false;
+    else{
+        if (d->iz != NULL && strcasecmp(d->pal, pal) < 0)
+            return PerDicc(d->iz, pal);
+        else{
+			if (d->de != NULL && strcasecmp(d->pal, pal) > 0)
+            	return PerDicc(d->de, pal);
+        	else{ 
+				if (strcasecmp(d->pal, pal) == 0)
+					return true;
+				else
+					return false;
+        	}
+		}
+	}
+}
+
 void imprimirDic(dic d) { 
-    	if (!vacioDic(d)){
+    if (!vacioDic(d)){
 		imprimirDic (izDic(d));
 		printf("%s \n", d->pal);
 		imprimirDic (deDic(d));
 	}
-
 }
