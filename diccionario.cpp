@@ -63,13 +63,11 @@ bool PerDicc(dic d,Cadena pal){
         if (d->iz != NULL && strcasecmp(d->pal, pal) < 0){
             return PerDicc(d->iz, pal);
         }else{
-			if (d->de != NULL && strcasecmp(d->pal, pal) > 0) {
+			if (d->de != NULL && strcasecmp(d->pal, pal) > 0)
             	return PerDicc(d->de, pal);
-			}
         }else{ 
-			if (strcasecmp(d->pal, pal) == 0) {
+			if (strcasecmp(d->pal, pal) == 0)
 				return true;
-			}
         }
     }
 }
