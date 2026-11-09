@@ -59,17 +59,18 @@ bool insertarPalDic(dic & d, Cadena palabra) {
 bool PerDicc(dic d,Cadena pal){
     if(d == NULL){
         return false;
-    }else {
-        if (d->iz != NULL && strcasecmp(d->pal, pal) < 0){
+    }else{
+        if (d->iz != NULL && strcasecmp(d->pal, pal) < 0)
             return PerDicc(d->iz, pal);
-        }else{
+        else{
 			if (d->de != NULL && strcasecmp(d->pal, pal) > 0)
             	return PerDicc(d->de, pal);
-        }else{ 
-			if (strcasecmp(d->pal, pal) == 0)
-				return true;
-        }
-    }
+        	else{ 
+				if (strcasecmp(d->pal, pal) == 0)
+					return true;
+        	}
+		}
+	}
 }
 
 void imprimirDic(dic d) { 
