@@ -225,7 +225,15 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
 // Borra una palabra del diccionario.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if(borrarDic(e->diccionario, palabraABorrar)){ 
+		return OK;
+	} else {
+		return ERROR;
+	}
+
+
+
+	return ERROR;
 }
 
 TipoRetorno ImprimirDiccionario(editor & e){

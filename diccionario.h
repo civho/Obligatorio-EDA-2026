@@ -23,4 +23,10 @@ void imprimirDic(dic d);
 Cadena aMayuscula(Cadena palabra);
 //pre: palabra no vacia
 //pos: convierte una cadena de caracteres a mayuscula
+
 bool PerDicc(dic d,Cadena pal);
+// retorna true si la palabra se encunetra en el diccioanrio, false en el caso contrario
+
+bool borrarDic(dic & d, Cadena palabra);
+// elimina una palabra del diccionario
+

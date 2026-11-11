@@ -76,3 +76,89 @@ void imprimirDic(dic d) {
 		imprimirDic (deDic(d));
 	}
 }
+
+int max(int a, int b){
+// Retorna el maximo de a y b.
+	if(a > b)
+		return a;
+	else
+		return b;
+}
+
+int profundidad(dic d){
+// Retorna la profundidad del arbol.
+	if (d == NULL)
+		return 0;
+	else
+		return 1 + max(profundidad(d->iz), profundidad(d->de));
+}
+
+dic max_iz(dic d){
+	if (d->de == NULL){
+		return d;
+	}else
+		return max_iz(d->de);
+}
+
+dic min_de(dic d){
+	if (d->iz == NULL){
+		return d;
+		
+	}else
+		return min_de(d->iz);
+}
+
+
+
+
+bool borrarDic(dic & d, Cadena palabra) {
+    int comparar;
+    if(d != NULL){ 
+         comparar = strcasecmp(d->pal, palabra);
+    }
+
+    if(!PerDicc(d, palabra)){
+        return false;
+    }else if(comparar > 0){
+        return borrarDic(d->iz, palabra);
+    }else if(comparar < 0){
+        return borrarDic(d->de, palabra);
+    }else if(comparar == 0){
+        if(d->de == NULL && d->iz == NULL){
+            delete d;
+            d = NULL;
+            return true;
+        }else if(d->de == NULL) {
+            dic aux = d->iz;
+            delete d;
+            d = aux;
+            return true;
+        }else if(d->iz == NULL){
+            dic aux = d->de;
+            delete d;
+            d = aux;
+            return true;
+        }else {
+            if(profundidad(d->iz) > profundidad(d->de)){ 
+
+                dic nodoborrar = max_iz(d->iz);
+                delete[] d->pal;
+                d->pal = new char[strlen(nodoborrar->pal) + 1];
+                strcpy(d->pal, nodoborrar->pal);
+                return borrarDic(d->iz, nodoborrar->pal);
+                
+                
+            }else {
+                dic nodoborrar = min_de(d->de);
+                delete[] d->pal;
+                d->pal = new char[strlen(nodoborrar->pal) + 1];
+                strcpy(d->pal, nodoborrar->pal);
+                return borrarDic(d->de, nodoborrar->pal);
+            
+            }
+
+        }
+    }
+    return false;
+
+}
