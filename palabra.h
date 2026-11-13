@@ -35,9 +35,9 @@ void ImprimirPal(pal p);
 bool PosicionValidaPal(Posicion x,pal p);
 //Chequea si la Posicion x ingresada es valida.
 
-// linea correrPalOverflow(linea l,pal p);
-// //PRE:Linea no vacia,pal con max palabras
-// //Hace las asignaciones correspondientes.
+pal correrPalOverflow(pal p,pal psigL);
+//PRE:p con nodos max palabras+1, psigL existe y es el primero de los nodos pal de la siguiente linea.
+//POS:Mueve el nodo excedente al inicio de psigL, y retorna esta misma cadena de nodos pal. 
 
 pal BorrarOcurrenciasPalabra(pal p, Cadena palabra);
 //POS:Devuelve una lista de nodos palabra eliminando y liberando de memoria las que tengan la palabra dada.
