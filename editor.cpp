@@ -81,7 +81,11 @@ TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 // Ver más detalles en la letra del obligatorio.
 	linea aux=e->lin;
 	if(existeLinea(e->contL ,posicionLinea)) {
+		
 		aux = buscarLinea(aux, posicionLinea);
+		if(posicionLinea == 1) {
+			e->lin = sigLinea(e->lin);
+		}
 		aux =	borrarLinea(aux);
 		e->contL = e->contL-1;
 		if(e->contL == 0){ // se fija si no hay mas lineas en el editor para agregar null a e->lin y evitar errores

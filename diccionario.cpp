@@ -30,8 +30,8 @@ bool insertarPalDic(dic & d, Cadena palabra) {
         dic aux = new arbol_diccionario;
         aux->iz = NULL;
         aux->de = NULL;
-        aux->pal = new char[strlen(palabra) + 1]; //copia el string a pal
-        strcpy(aux->pal, palabra);
+        aux->pal = new char[strlen(palabra) + 1]; 
+        strcpy(aux->pal, palabra); //copia el string a pal
         d=aux;
         return true;
     } else {

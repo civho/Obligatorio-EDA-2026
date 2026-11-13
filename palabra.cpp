@@ -4,8 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 
-int MAX_PAL=20;
-
 struct nodo_pal {
     pal sig;
     Cadena palabra=NULL;
@@ -68,7 +66,7 @@ pal DeleteAllPal(pal p){
 }
 
 pal consPal(pal p, Cadena palabra){
-	Cadena auxpal = new char[MAX_PAL];
+	Cadena auxpal = new char[strlen(palabra) + 1];
 	pal aux = new(nodo_pal);
 		aux->sig = p;
 	aux->palabra=auxpal;
@@ -122,7 +120,7 @@ pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
 	if (p==NULL){
 		return NULL;
 	} else {
-		if (strcmp(p->palabra,palabra)==0){
+		if (strcasecmp(p->palabra,palabra)==0){
 			pal aux;
 			aux=p;
 			p=PalSig(p);
