@@ -13,6 +13,7 @@
 #include <string.h>
 #include <iostream>
 
+
 using namespace std;
 
 struct nodo_editor{
@@ -67,6 +68,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 			}
 
 		}
+			e->contL ++;
 			return OK;
 
 	}
@@ -126,7 +128,7 @@ TipoRetorno ImprimirTexto(editor & e){
 	}else{
 		for(Posicion i = 1; i <= e->contL; i++) {
 			linea aux = buscarLinea(e->lin, i);
-			imprimirLinea(aux,i);
+			imprimirLinea(aux, i);
 		}
 	}
 	return OK;
@@ -141,13 +143,11 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-printf("aaa");
 if(existeLinea(e->contL, posicionLinea)){
 	
 	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
 	if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLin))){
 		//se asegura que la posicion de insersion de palabra sea correcta
-		
 		pal auxPal = AddPalPos(obtenerPal(auxLin),posicionPalabra, palabraAIngresar); // intenta agregar la palabra a la posicion adecuada
 		
 		if(auxPal != NULL){
@@ -174,6 +174,7 @@ if(existeLinea(e->contL, posicionLinea)){
 				
 			return ERROR; //devuelve un error si la posicion ingresada es erronea
 			}
+			AgBuffer(e->buf, palabraAIngresar);
 			return OK;
 		}else {
 			return ERROR;
@@ -219,7 +220,7 @@ TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 
 	if(existeLinea(e->contL, posicionLinea)) {
 		linea aux = buscarLinea(e->lin, posicionLinea);
-		imprimirLinea(aux, posicionLinea);
+		imprimirLinea(aux, posicionLinea); 
 		return OK;
 	}
 
@@ -232,9 +233,13 @@ TipoRetorno IngresarPalabraDiccionario(editor & e, Cadena palabraAIngresar){
 // Esta operación debe realizarse en a lo sumo O(log n) promedio.
 // Ver más detalles en la letra del obligatorio.
 
-	e->diccionario = insertaraPalabraDic(e->diccionario,palabraAIngresar);
-	
-	return OK;
+
+		if(insertarPalDic(e->diccionario, palabraAIngresar)){
+			return OK; // se creo sin problemas
+		}else {
+			return ERROR; // palabra ya existe
+		}
+	return ERROR;
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor & e, Cadena palabraABorrar){
@@ -247,39 +252,53 @@ TipoRetorno ImprimirDiccionario(editor & e){
 // Muestra las palabras del diccionario alfabéticamente.
 // Esta operación debe realizarse en O(n) peor caso.
 // Ver más detalles en la letra del obligatorio.
-	// dic aux = e->diccionario;
-	// if(vacioDic(aux)){
-	// 	printf("Diccionario vacio\n");
-	// }else{
-	// 	imprimirDiccionario(izDic(aux));
-	// 	printf("%s\n", raizDic(aux));
-	// 	imprimirDiccionario(deDic(aux));
-	// }
-	return OK;
+	if(vacioDic(e->diccionario)){ 
+		printf("Diccionario Vacio");
+    }else{
+		imprimirDic(e->diccionario); 
+	}
+	return OK; 
 }
 
 TipoRetorno ImprimirTextoIncorrecto(editor & e){
 // Muestra las palabras del texto que no se encuentran en el diccionario.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if (e->contL == 0)
+		return OK;
+	else{
+		for(Posicion i = 1; i <= e->contL; i++){
+			linea aux = buscarLinea(e->lin, i);
+			pal tex = obtenerPal(aux);
+			printf("%d:", i);
+			while (!IsEmptyPal(tex)){
+				if (PerDicc(e->diccionario,ObeTex(tex))){
+					tex = PalSig(tex);
+				}else{
+					printf(" %s", ObeTex(tex));
+					tex = PalSig(tex);
+				}
+			}	
+			printf("\n");
+		}
+	}
+	return OK;
 }
 
 TipoRetorno ImprimirUltimasPalabras(editor & e){
 // Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 // Ver más detalles en la letra del obligatorio.
-	// buffer aux = e->buf;
-	// if(aux == NULL){
-	// 	printf("No se ingresaron palabras\n");
-	// }else{
-	// 	while(aux != NULL){
-	// 		printf("%s", aux->palabra);
-	// 		printf(" ");
-	// 		aux = aux->sig;
-	// 	}
-	// 	printf("\n");
-	// }
+
+		buffer aux = e->buf;
+	if(IsEmpty(aux)){
+		printf("No se ingresaron palabras\n");
+	}else{
+		while (!IsEmpty(aux)){
+			imprimirBuffer(aux);
+			aux = SigB(aux);
+		}
+	}
 	return OK;
-}
+	}	
 
 TipoRetorno DestruirEditor(editor & e){
 // Destruye la estructura editor y libera la memoria asociada.

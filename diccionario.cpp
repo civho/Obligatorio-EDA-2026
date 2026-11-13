@@ -2,11 +2,13 @@
 #include "diccionario.h"
 #include <stdio.h>
 #include <string.h>
-
-struct nodo_diccionario{
+#include <cctype>
+struct arbol_diccionario{
     dic iz, de;
     Cadena pal;
 };
+
+
 
 
 dic crearDic(){
@@ -25,25 +27,56 @@ bool vacioDic(dic d) {
     return d == NULL;
 }
 
-dic insertaraPalabraDic(dic d, Cadena palabra) {
+
+bool insertarPalDic(dic & d, Cadena palabra) {
+    
+    
     if (d == NULL) {
-        dic aux = new nodo_diccionario;
+        dic aux = new arbol_diccionario;
         aux->iz = NULL;
         aux->de = NULL;
-        aux->pal = new char[strlen(palabra) + 1];
-            strcpy(aux->pal, palabra);
-        return aux;
+        aux->pal = new char; //copia el string a pal
+        strcpy(aux->pal, palabra);
+        d=aux;
+        return true;
     } else {
-        int comparar = strcmp(d->pal, palabra);
-        if (comparar < 0){
-            d->iz = insertaraPalabraDic(d->iz, palabra);
-            return d;
-        } else if (comparar > 0) {
-            d->de = insertaraPalabraDic(d->de, palabra);
-            return d;
-        } else if (comparar == 0) {
-            return d;
+        
+        int comparar = strcasecmp(d->pal,palabra);
+        if (comparar > 0){
+            return  insertarPalDic(d->iz, palabra);;
+
+        } else if (comparar < 0) {
+            return insertarPalDic(d->de, palabra);;
+            
+        } else if (comparar == 0) { // si la palabara ya existe
+            return false;
         }
     }
     return NULL;
+}
+
+
+bool PerDicc(dic d,Cadena pal){
+    if(d == NULL){
+        return false;
+    }else {
+
+        int comparar = strcasecmp(d->pal, pal);
+        if (d != NULL && comparar < 0){
+            return PerDicc(d->iz, pal);
+        }else if (d != NULL && comparar > 0) {
+            return PerDicc(d->de, pal);
+        } else if (d != NULL && comparar == 0) {
+            return true;
+        }
+    }
+}
+
+void imprimirDic(dic d) { 
+    	if (!vacioDic(d)){
+		imprimirDic (izDic(d));
+		printf("%s \n", d->pal);
+		imprimirDic (deDic(d));
+	}
+
 }

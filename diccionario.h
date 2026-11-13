@@ -1,6 +1,6 @@
 #include "definiciones.h"
 
-typedef struct nodo_diccionario * dic;
+typedef struct arbol_diccionario * dic;
 
 dic crearDic();
 //retorna NULL
@@ -14,4 +14,13 @@ dic izDic(dic d);
 bool vacioDic(dic d);
 // retorna true si d esta, vacio false si no
 
-dic insertaraPalabraDic(dic d, Cadena palabra);
+bool insertarPalDic(dic  & d, Cadena palabra);
+// inserta la palabra ordenadamente en el diccionario
+
+void imprimirDic(dic d);
+// pre imprime los datos de el diccionario, si esta vacio devuelve "diccionario vacio"
+
+Cadena aMayuscula(Cadena palabra);
+//pre: palabra no vacia
+//pos: convierte una cadena de caracteres a mayuscula
+bool PerDicc(dic d,Cadena pal);
