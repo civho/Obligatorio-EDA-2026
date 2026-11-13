@@ -54,11 +54,11 @@ linea borrarLinea(linea l) {
        l->palabra = DeleteAllPal(l->palabra); //Borrar palabra
     }
     if(l->ant != l){ 
-        linea aux = l;
-        l = aux->sig;
-        aux->sig->ant = aux->ant;
-        aux->ant->sig = aux->sig;
-        delete aux;
+        linea aux = l; // guarda l para borrarlo
+        l = aux->sig; // mueve l un nodo
+        aux->sig->ant = aux->ant; // le da al valor "ant" del nodo siguiente (que es  l) el valor "ant" del nodo actual
+        aux->ant->sig = aux->sig; // le da al valor "sig" del nodo anterior el valor "sig" de aux
+        delete aux; 
     }else {
         delete l;
         return NULL;

@@ -42,6 +42,7 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
+
 	e->lin = snocLinea(e->lin);
 	e->contL ++;
 	return OK;
@@ -83,6 +84,10 @@ TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 		aux = buscarLinea(aux, posicionLinea);
 		aux =	borrarLinea(aux);
 		e->contL = e->contL-1;
+		if(e->contL == 0){ // se fija si no hay mas lineas en el editor para agregar null a e->lin y evitar errores
+			e->lin = NULL;
+		}
+
 		return OK;
 	}else {
 		return ERROR;
@@ -174,7 +179,7 @@ if(existeLinea(e->contL, posicionLinea)){
 				
 			return ERROR; //devuelve un error si la posicion ingresada es erronea
 			}
-			AgBuffer(e->buf, palabraAIngresar);
+			e->buf = AgBuffer(e->buf, palabraAIngresar);
 			return OK;
 		}else {
 			return ERROR;
