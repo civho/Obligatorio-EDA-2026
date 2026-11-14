@@ -145,3 +145,25 @@ void EliminarPal(pal & p){
 Cadena ObeTex(pal p){
 	return p->palabra;
 }
+
+
+pal SobrecargarPal(pal cabeza,pal cola){
+	
+if (cabeza==NULL){
+	return cola;
+}	else{
+	cabeza->sig=SobrecargarPal(PalSig(cabeza),cola);
+	return cabeza;
+}
+}
+
+pal correrPalCompresion(pal p,pal psigL){
+int i=1;
+while (p!=NULL && i<MAX_CANT_PALABRAS_X_LINEA){
+	p=PalSig(p);
+	i++;
+}
+pal aux=PalSig(p);
+p->sig=NULL;
+return aux;
+}

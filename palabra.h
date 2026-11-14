@@ -36,7 +36,7 @@ bool PosicionValidaPal(Posicion x,pal p);
 //Chequea si la Posicion x ingresada es valida.
 
 pal correrPalOverflow(pal p,pal psigL);
-//PRE:p con nodos max palabras+1, psigL existe y es el primero de los nodos pal de la siguiente linea.
+//PRE:p con nodos max palabras+1 al menos, psigL existe y es el primero de los nodos pal de la siguiente linea.
 //POS:Mueve el nodo excedente al inicio de psigL, y retorna esta misma cadena de nodos pal. 
 
 pal BorrarOcurrenciasPalabra(pal p, Cadena palabra);
@@ -47,3 +47,10 @@ void EliminarPal(pal & p);
 
 Cadena ObeTex(pal p);
 //Retorna la palabra
+
+pal SobrecargarPal(pal cabeza,pal cola);
+//POS:Añade el pal cola al final de los nodos del pal cabeza, sin restricciones.
+
+pal correrPalCompresion(pal p,pal psigL);
+//PRE:Funcion usada exclusivamente para comprimir texto, misma logica que correrPalOverflow.
+//POS:Separa los nodos excedentes y son los que devuelve

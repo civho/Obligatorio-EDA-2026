@@ -146,7 +146,52 @@ TipoRetorno ImprimirTexto(editor & e){
 TipoRetorno ComprimirTexto(editor & e){
 // Comprime las palabras del texto. Para implementar esta operación no debe generarse un nuevo documento.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+linea auxLin=e->lin;
+linea auxLin2;
+pal auxPal=CrearPalabra();
+pal auxPal2;
+Posicion i=0;
+//Este while carga todos los nodos pal del texto en uno solo externo al editor, como si fuese un tren.
+while (i<e->contL){
+	auxPal=SobrecargarPal(auxPal,obtenerPal(auxLin));
+	i++;
+	auxLin=insertarPalenLinea(auxLin,CrearPalabra());
+	auxLin=sigLinea(auxLin);
+}
+i=0;
+auxLin=e->lin;
+auxLin2=sigLinea(auxLin);
+auxLin=insertarPalenLinea(auxLin,auxPal);
+//Este while, usando la funcion de correrPalCompresion, va a separar el tren en secciones iguales a MAX_CANT_PALABRAS_X_LINEA y dejarlas linea a linea, empezando por la primera.
+while (cantPal(auxPal)>MAX_CANT_PALABRAS_X_LINEA){
+	auxPal2=CrearPalabra();
+	auxPal2=correrPalCompresion(auxPal,auxPal2);
+	auxLin2=insertarPalenLinea(auxLin2,auxPal2);
+	auxLin=auxLin2;
+	auxLin2=sigLinea(auxLin);
+	auxPal=auxPal2;
+	i++;
+}
+//Chequeo si en la ultima linea que inserte se inserto algo efectivamente.
+if (!IsEmptyPal(auxPal)){
+	i++;
+	auxLin=auxLin2;
+}
+auxLin2=sigLinea(auxLin);
+//Salimos cuando no hay mas nodos pal para insertar, o sea que la linea en la que estamos(y sus siguientes) van a estar vacias. 
+Posicion cont=0;
+while (i<e->contL){
+	auxLin=borrarLinea(auxLin);
+	auxLin=auxLin2;
+	auxLin2=sigLinea(auxLin);
+	i++;
+	cont++;
+}
+//Se usa el cont para poder hacer la resta de lineas borradas despues de iterar con el i.
+e->contL=e->contL-cont;
+
+	return OK;
 }
 
 TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
