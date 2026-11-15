@@ -48,6 +48,7 @@ bool insertarPalDic(dic & d, Cadena palabra) {
             return false;
         }
     }
+    return false;
 }
 
 bool PerDicc(dic d,Cadena pal){
@@ -161,4 +162,13 @@ bool borrarDic(dic & d, Cadena palabra) {
     }
     return false;
 
+}
+
+dic destruirDic(dic d){
+	if (d != NULL){
+		d->iz = destruirDic(d->iz);
+		d->de = destruirDic(d->de);
+		delete d;
+	}
+	return d;
 }

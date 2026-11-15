@@ -364,5 +364,9 @@ TipoRetorno ImprimirUltimasPalabras(editor & e){
 
 TipoRetorno DestruirEditor(editor & e){
 // Destruye la estructura editor y libera la memoria asociada.
-	return NO_IMPLEMENTADA;
+	 BorrarTodo(e);
+	 e->diccionario = destruirDic(e->diccionario);
+	 e->buf = destruirBuffer(e->buf);
+	delete e;		
+	return OK;
 }

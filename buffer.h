@@ -19,3 +19,6 @@ buffer AgBuffer(buffer b, Cadena pal);
 
 void imprimirBuffer(buffer b);
 //Imprime la Palabra
+
+buffer destruirBuffer(buffer b);
+// elimina todos los nodos de buffer y libera memoria

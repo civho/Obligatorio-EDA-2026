@@ -20,9 +20,6 @@ bool insertarPalDic(dic  & d, Cadena palabra);
 void imprimirDic(dic d);
 // pre imprime los datos de el diccionario, si esta vacio devuelve "diccionario vacio"
 
-Cadena aMayuscula(Cadena palabra);
-//pre: palabra no vacia
-//pos: convierte una cadena de caracteres a mayuscula
 
 bool PerDicc(dic d,Cadena pal);
 // retorna true si la palabra se encunetra en el diccioanrio, false en el caso contrario
@@ -30,3 +27,5 @@ bool PerDicc(dic d,Cadena pal);
 bool borrarDic(dic & d, Cadena palabra);
 // elimina una palabra del diccionario
 
+dic destruirDic(dic d);
+// elimina todos los nodos del editor y libera memoria

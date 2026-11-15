@@ -1,7 +1,7 @@
 #include "buffer.h"
 #include "definiciones.h"
-#include <stdio.h>
 #include <string.h> 
+#include <stdio.h>
 
 struct nodo_buffer{
     buffer sig, ant;
@@ -69,3 +69,13 @@ void imprimirBuffer(buffer b){
     printf("%s\n", b->palabra);
 }
 
+buffer destruirBuffer(buffer b) {
+    if(b == NULL){
+        return NULL;
+    }else {
+        destruirBuffer(b->sig);
+        delete[] b->palabra;
+        delete b;
+        return NULL;
+    }
+}
