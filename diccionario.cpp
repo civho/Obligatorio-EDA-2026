@@ -71,7 +71,7 @@ bool PerDicc(dic d,Cadena pal){
 }
 
 void imprimirDic(dic d) { 
-    if (!vacioDic(d)){
+    if (!vacioDic(d)){ //imprime inorder
 		imprimirDic (izDic(d));
 		printf("%s \n", d->pal);
 		imprimirDic (deDic(d));
@@ -94,14 +94,16 @@ int profundidad(dic d){
 		return 1 + max(profundidad(d->iz), profundidad(d->de));
 }
 
-dic max_iz(dic d){
+dic max_iz(dic d){ 
+    // retorna el ultimo hiijo de la izquierda
 	if (d->de == NULL){
-		return d;
+        return d;
 	}else
-		return max_iz(d->de);
+    return max_iz(d->de);
 }
 
 dic min_de(dic d){
+    // retorna el ultimo hiijo de la derecha
 	if (d->iz == NULL){
 		return d;
 		
@@ -125,22 +127,22 @@ bool borrarDic(dic & d, Cadena palabra) {
     }else if(comparar < 0){
         return borrarDic(d->de, palabra);
     }else if(comparar == 0){
-        if(d->de == NULL && d->iz == NULL){
+        if(d->de == NULL && d->iz == NULL){ // se es el ultimo nodo de una rama
             delete d;
             d = NULL;
             return true;
-        }else if(d->de == NULL) {
+        }else if(d->de == NULL) { // si le quedan hijos a la izq
             dic aux = d->iz;
             delete d;
             d = aux;
             return true;
-        }else if(d->iz == NULL){
+        }else if(d->iz == NULL){ // s le quedan hijos a la der
             dic aux = d->de;
             delete d;
             d = aux;
             return true;
-        }else {
-            if(profundidad(d->iz) > profundidad(d->de)){ 
+        }else {                 // si tiene dos hijos 
+            if(profundidad(d->iz) > profundidad(d->de)){ // diferenciamos por profundidad para mantener balance 
 
                 dic nodoborrar = max_iz(d->iz);
                 delete[] d->pal;

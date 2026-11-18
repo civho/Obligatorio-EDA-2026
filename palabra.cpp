@@ -39,7 +39,7 @@ pal AddPalPos(pal p,Posicion x,Cadena palabra){
 		return p;
 	}
 }
-//Falta chequear que el X es valido,y como manejar el error
+
 
 pal BorrarPalPos(pal p,Posicion x){
 	if (x==1){
@@ -73,7 +73,6 @@ pal consPal(pal p, Cadena palabra){
 	strcpy(aux->palabra,palabra);
 	return aux;
 }
-//MAX PAL habria que declararla? Maximo de letras que entrarian por palabra.
 
 void ImprimirPal(pal p){
 	if (p!=NULL){
@@ -99,23 +98,24 @@ return cont;
 bool PosicionValidaPal(Posicion x,pal p){
 	if (x>MAX_CANT_PALABRAS_X_LINEA){
 		return false;
-	}else if(x<=cantPal(p)+1){
+	}else if(x<=cantPal(p)+1){ // en caso de intnetar ingresar posicion siguiente a ult pal ingresada
 		return true;
 	}else {
 		return false;
 	}
 }
-//Si da error leer el #define MAX_CANT_PALABRAS_X_LINEA 3.
+
 
 pal correrPalOverflow(pal p,pal psigL){
-for (int i=1;i<MAX_CANT_PALABRAS_X_LINEA;i++){
-	p=PalSig(p);
+	for (int i=1;i<MAX_CANT_PALABRAS_X_LINEA;i++){
+		p=PalSig(p);
+	}
+		pal aux=PalSig(p);
+		p->sig=NULL;
+		aux->sig=psigL;
+	return aux;	
 }
-pal aux=PalSig(p);
-p->sig=NULL;
-aux->sig=psigL;
-return aux;
-}
+
 pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
 	if (p==NULL){
 		return NULL;
@@ -124,7 +124,7 @@ pal BorrarOcurrenciasPalabra(pal p, Cadena palabra){
 			pal aux;
 			aux=p;
 			p=PalSig(p);
-			p=BorrarOcurrenciasPalabra(p,palabra);
+			p=BorrarOcurrenciasPalabra(p,palabra); // para que siga armando la lista
 			EliminarPal(aux);
 			return p;
 		} else {
@@ -149,12 +149,12 @@ Cadena ObeTex(pal p){
 
 pal SobrecargarPal(pal cabeza,pal cola){
 	
-if (cabeza==NULL){
-	return cola;
-}	else{
-	cabeza->sig=SobrecargarPal(PalSig(cabeza),cola);
-	return cabeza;
-}
+	if (cabeza==NULL){
+		return cola;
+	}	else{
+		cabeza->sig=SobrecargarPal(PalSig(cabeza),cola); // mueve el nodo cola actual al final de la lista de cabeza
+		return cabeza;
+	}
 }
 
 pal correrPalCompresion(pal p,pal psigL){

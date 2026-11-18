@@ -20,8 +20,8 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios para implementar el editor.
 	Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-	linea lin ; 
-	buffer buf ; // las 3 ultimas letras
+	linea lin ; //doblemente enlazada circular
+	buffer buf ; // las 3 ultimas letras tipo: doblemente enlazada simple
 	Posicion contL;
 	dic diccionario;
 };
@@ -80,7 +80,7 @@ TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea){
 // Borra la línea en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 	linea aux=e->lin;
-	if(existeLinea(e->contL ,posicionLinea)) {
+	if(existeLinea(e->contL ,posicionLinea) && posicionLinea > 0) {
 		
 		aux = buscarLinea(aux, posicionLinea);
 		if(posicionLinea == 1) {
@@ -146,9 +146,10 @@ TipoRetorno ImprimirTexto(editor & e){
 TipoRetorno ComprimirTexto(editor & e){
 // Comprime las palabras del texto. Para implementar esta operación no debe generarse un nuevo documento.
 // Ver más detalles en la letra del obligatorio.
+if(e->lin != NULL) {
 
-linea auxLin=e->lin;
-linea auxLin2;
+	linea auxLin=e->lin;
+	linea auxLin2;
 pal auxPal=CrearPalabra();
 pal auxPal2;
 Posicion i=0;
@@ -191,13 +192,16 @@ while (i<e->contL){
 //Se usa el cont para poder hacer la resta de lineas borradas despues de iterar con el i.
 e->contL=e->contL-cont;
 
-	return OK;
+return OK;
+	}else {
+		return ERROR;
+	}
 }
 
 TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-if(existeLinea(e->contL, posicionLinea)){
+if(existeLinea(e->contL, posicionLinea ) && posicionLinea > 0){
 	
 	linea auxLin = buscarLinea(e->lin, posicionLinea); //busca la linea especificada
 	if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLin))){
@@ -239,9 +243,9 @@ if(existeLinea(e->contL, posicionLinea)){
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	if(existeLinea(e->contL, posicionLinea)){ // valida posicion de linea
+	if(existeLinea(e->contL, posicionLinea) && posicionLinea > 0){ // valida posicion de linea
 		linea auxLinea = buscarLinea(e->lin, posicionLinea); // guarda la linea deseada
-		if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLinea))){ // valida posicion palabra
+		if(PosicionValidaPal(posicionPalabra, obtenerPal(auxLinea)) && posicionPalabra > 0){ // valida posicion palabra
 			pal auxPal = BorrarPalPos(obtenerPal(auxLinea),posicionPalabra); // lista de palabras con la palabra borrada
 			insertarPalenLinea(auxLinea, auxPal); // agrega la primera palabra de una lista de palabaras en una Linea 
 			return OK;
@@ -257,7 +261,7 @@ TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionP
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor & e, Posicion posicionLinea, Cadena palabraABorrar){
 // Borra todas las ocurrencias de una palabra en la línea indicada.
 // Ver más detalles en la letra del obligatorio.
-if(existeLinea(e->contL, posicionLinea)){
+if(existeLinea(e->contL, posicionLinea) && posicionLinea > 0){
 	linea auxLin = buscarLinea(e->lin, posicionLinea);						//Consigo nodo linea donde debo borrar pal
 	pal auxPal=obtenerPal(auxLin);											//De ese nodo linea copio el primero de sus nodo pal
 	auxPal=BorrarOcurrenciasPalabra(auxPal,palabraABorrar);					//Borro las palabras(si hay) que me pasaron,libero memoria,re asigno punteros.
@@ -272,7 +276,7 @@ TipoRetorno ImprimirLinea(editor & e, Posicion posicionLinea){
 // Imprime la línea por pantalla.
 // Ver más detalles en la letra del obligatorio.
 
-	if(existeLinea(e->contL, posicionLinea)) {
+	if(existeLinea(e->contL, posicionLinea) && posicionLinea > 0) {
 		linea aux = buscarLinea(e->lin, posicionLinea);
 		imprimirLinea(aux, posicionLinea); 
 		return OK;

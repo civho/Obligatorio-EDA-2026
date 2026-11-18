@@ -25,7 +25,6 @@ bool existeLinea(Posicion contL,Posicion posicionLinea);
 //retorna true si existe la linea deseada, false si no
 
 linea buscarLinea(linea l, Posicion x);
-// pre: linea no vacia
 // se mueve a una linea existente
 
 linea insertarPalenLinea(linea l, pal p);

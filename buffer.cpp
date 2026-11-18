@@ -34,15 +34,15 @@ buffer AgBuffer(buffer b, Cadena pal){
     }else{
         buffer iter = b;
         int cantT = 1;
-        while(iter->sig != NULL){
+        while(iter->sig != NULL){ //llegar al ultimo
             iter = iter->sig;
-            cantT++;
+            cantT++; //cuenta la cantidad de palabras
         }
-        if (cantT < MAX_CANT_ULTIMAS_PALABRAS){
+        if (cantT < MAX_CANT_ULTIMAS_PALABRAS){ // no está lleno
             buffer aux = new(nodo_buffer); 
             aux->palabra = new char[strlen(pal) + 1];
             strcpy(aux -> palabra, pal);
-            aux -> sig = b;
+            aux -> sig = b; // agrega la palabara al al buffer en primer lugar
             aux -> ant = NULL;
             b -> ant = aux;    
             return aux;
@@ -52,12 +52,14 @@ buffer AgBuffer(buffer b, Cadena pal){
             strcpy(aux -> palabra, pal);
             aux -> sig = b;
             aux -> ant = NULL;
-            if (iter->ant != NULL) {
+            if (iter->ant != NULL) { 
                 iter->ant->sig = NULL;
                 b -> ant = aux;
+                delete[] iter->palabra;
                 delete(iter);
-            }else{
+            }else{ // una sola palabra
                 aux->sig = NULL; 
+                delete[] iter->palabra;
                 delete(iter);
             }    
             return aux; 

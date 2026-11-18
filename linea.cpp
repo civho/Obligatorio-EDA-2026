@@ -12,7 +12,7 @@ linea crearLinea(){
     return NULL;
 }
 
-linea snocLinea(linea l){
+linea snocLinea(linea l){ //inserta un nodo al final
     linea aux = new nodo_linea;
     aux->palabra = NULL;
     if(l == NULL){ 
@@ -27,7 +27,7 @@ linea snocLinea(linea l){
     }
     return l;
 }
-linea consLinea(linea l) {
+linea consLinea(linea l) { // agrega un nodo al principio de la lista 
     if(l == NULL){ 
         linea aux = new nodo_linea;
         aux->palabra = NULL;
@@ -53,9 +53,9 @@ linea borrarLinea(linea l) {
     if(l->palabra != NULL){
        l->palabra = DeleteAllPal(l->palabra); //Borrar palabra
     }
-    if(l->ant != l){ 
-        linea aux = l; // guarda l para borrarlo
-        l = aux->sig; // mueve l un nodo
+    if(l->ant != l){ //comprueba si hay mas de un nodo
+        linea aux = l;
+        l = aux->sig; 
         aux->sig->ant = aux->ant; // le da al valor "ant" del nodo siguiente (que es  l) el valor "ant" del nodo actual
         aux->ant->sig = aux->sig; // le da al valor "sig" del nodo anterior el valor "sig" de aux
         delete aux; 
@@ -102,11 +102,8 @@ linea insertarPalenLinea(linea l, pal p) {
 }
 
 void imprimirLinea(linea l, Posicion x){ 
-    linea aux = l;
             printf("%d: ", x);
-            ImprimirPal(aux->palabra);
+            ImprimirPal(l->palabra);
             printf("\n");
-            aux = aux->sig;
-    
 }
 

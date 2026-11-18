@@ -6,9 +6,11 @@ dic crearDic();
 //retorna NULL
 
 dic deDic(dic d);
+// pre d no vacio
 // retorna el hijo derecho de d
 
 dic izDic(dic d);
+// pre d no vacio
 // retorna el hijo izquierdo de d
 
 bool vacioDic(dic d);
